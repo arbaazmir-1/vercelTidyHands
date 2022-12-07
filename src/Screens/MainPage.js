@@ -73,7 +73,7 @@ const MainPage = () => {
           <div className="error">{error}</div>
         ) : (
           <>
-            {gigs ? (
+            {typeof gigs !== "undefined" ? (
               <>
                 <h4 style={{ margin: "10px" }} className="gigListCard">
                   Gigs Near You
