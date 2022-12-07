@@ -18,21 +18,22 @@ const MainPage = () => {
   const { loading, error, data } = homepage;
   const { gigs, activeHelpers, gigsRadius } = data;
 
-  // const [accessLocation, setAccessLocation] = React.useState("denied");
-  // //ask user to turn on location on mobile device
+  const [accessLocation, setAccessLocation] = React.useState("denied");
+  //ask user to turn on location on mobile device
 
-  // //check if user has location on
-  // const checkLocationService = async () => {
-  //   let result = await navigator.permissions.query({ name: "geolocation" });
-  //   if (result.state === "granted") {
-  //     setAccessLocation("granted");
-  //   } else {
-  //     setAccessLocation("denied");
-  //   }
-  // };
+  //check if user has location on
+  const checkLocationService = async () => {
+    let result = await navigator.permissions.query({ name: "geolocation" });
+    if (result.state === "granted") {
+      setAccessLocation("granted");
+    } else {
+      setAccessLocation("denied");
+    }
+  };
 
   //get user long and lat and then dispatch action
   const locationBasedApiCall = () => {
+    checkLocationService();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
@@ -48,18 +49,16 @@ const MainPage = () => {
 
   return (
     <>
-      {/* {accessLocation === "denied" && (
-        <div className="locationAccess">
+      <NavbarMobile />
+      {accessLocation === "denied" && (
+        <div className="noGigs">
+          <h1>
+            <i className="fas fa-exclamation-triangle"></i>
+          </h1>
           <h1>Location Access Denied</h1>
-          <p>
-            Please turn on location services to see gigs around you and helpers
-            near you
-          </p>
+          <h3>Please turn on location access to see active helpers</h3>
         </div>
       )}
-      {accessLocation === "granted" && (
-        <> */}
-      <NavbarMobile />
 
       {loading ? (
         <div className="loading">
@@ -102,17 +101,24 @@ const MainPage = () => {
                 ))}
               </>
             )}
-            {typeof gigs === "undefined" && (
+            {accessLocation === "denied" ? (
               <div className="noGigs">
-                <h1>No Gigs Found</h1>
-                <p>
-                  There are no gigs within {gigsRadius}KM of your location. Try
-                  increasing the radius
-                </p>
-                <Link to="/gigs">
-                  <Button className="button">Find Gigs</Button>
-                </Link>
+                <h1>
+                  <i className="fas fa-exclamation-triangle"></i>
+                </h1>
+                <h1>Location Access Denied</h1>
+                <h3>Please turn on location access to see gigs near you</h3>
               </div>
+            ) : (
+              typeof gigs === "undefined" && (
+                <div className="noGigs">
+                  <h1>
+                    <i className="fas fa-exclamation-triangle"></i>
+                  </h1>
+                  <h1>No Gigs Found</h1>
+                  <h3>Try increasing the radius</h3>
+                </div>
+              )
             )}
           </>
         )}
@@ -133,8 +139,6 @@ const MainPage = () => {
       </div>
       <CurrentFeature />
     </>
-    //   )}
-    // </>
   );
 };
 
