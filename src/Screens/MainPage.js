@@ -29,10 +29,9 @@ const MainPage = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
         const lat = position.coords.latitude;
-        // const long = 3.355372428894043;
-        // const lat = 101.62648010253906;
+        //check if lang and lat are correct
 
-        dispatch(homepageAction({ lat, long }));
+        dispatch(homepageAction({ long, lat }));
       });
     }
   };

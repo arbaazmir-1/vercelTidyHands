@@ -18,7 +18,7 @@ export default async (req, res) => {
             $geometry: {
               type: "Point",
               spherical: true,
-              coordinates: [lat, long],
+              coordinates: [long, lat],
             },
             $maxDistance: distance * 1000,
           },
