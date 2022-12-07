@@ -33,7 +33,6 @@ const MainPage = () => {
 
   //get user long and lat and then dispatch action
   const locationBasedApiCall = () => {
-    checkLocationService();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
@@ -46,8 +45,9 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
+    checkLocationService();
     locationBasedApiCall();
-  }, [dispatch]);
+  }, [dispatch, accessLocation]);
 
   return (
     <>
