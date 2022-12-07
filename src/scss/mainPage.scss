@@ -1,4 +1,31 @@
 //fixed button at the bottom right
+//horizontal scroll with child size 200px
+.profilesContainer{
+    display:flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+}
+.loading{
+    width: 90%;
+    margin: 0 auto;
+    height:20vh;
+    i{
+        font-size: 50px;
+        color: #FF6584;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        animation: spin 2s linear infinite;
+    }
+    //animation for spinner
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+}
 .fixedButton{
     position: fixed;
     bottom: 20px;

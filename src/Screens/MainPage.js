@@ -1,52 +1,71 @@
 import React from "react";
-
 import NavbarMobile from "../ components/NavbarMobile";
-import ProfileListHelper from "../ components/ProfileListHelper";
 import CatagoriesMenu from "../ components/CatagoriesMenu";
-import { useState, useEffect } from "react";
-import GigList from "../ components/GigList";
-import preval from "preval.macro";
+import { useEffect } from "react";
 import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
-
+import GigCard from "../ components/GigCard";
+import { useSelector, useDispatch } from "react-redux";
+import { homepageAction } from "../actions/homepageAction";
+import CurrentFeature from "../ components/currentFeature";
+import HelperProfile from "../ components/HelperProfile";
 const MainPage = () => {
-  const [timeDifference, setTimeDifference] = useState(0);
+  const dispatch = useDispatch();
 
-  const timeDiffFunc = () => {
-    const lastUpdated = preval`module.exports = new Date().getTime();`;
-    const now = new Date().getTime();
-
-    const difference = now - lastUpdated;
-    let seconds = Math.floor(difference / 1000);
-    let minutes = Math.floor(seconds / 60);
-    let hours = Math.floor(minutes / 60);
-    let days = Math.floor(hours / 24);
-
-    if (minutes < 1) {
-      setTimeDifference(`${seconds} seconds ago`);
-    } else if (hours < 1) {
-      setTimeDifference(`${minutes} minutes ago`);
-    } else if (days < 1) {
-      setTimeDifference(`${hours} hours ago`);
-    } else {
-      setTimeDifference(`${days} days ago`);
-    }
-  };
   useEffect(() => {
-    const interval = setInterval(() => timeDiffFunc(), 1000);
+    dispatch(homepageAction());
+  }, [dispatch]);
 
-    return () => clearInterval(interval);
-  }, []);
-  //on app load isVisible is set to true and button click sets it to false
+  const homepage = useSelector((state) => state.homePage);
+  const { loading, error, data } = homepage;
+  const { gigs, activeHelpers } = data;
+  const arrayOne = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
       <NavbarMobile />
       <h4 style={{ margin: "10px" }}>Helpers Around You!</h4>
-      <ProfileListHelper />
+      <div className="profilesContainer">
+        {loading ? (
+          <div className="loading">
+            <i className="fas fa-spinner"></i>
+          </div>
+        ) : error ? (
+          <h1>{error}</h1>
+        ) : (
+          <>
+            {typeof activeHelpers !== "undefined" && (
+              <>
+                {activeHelpers.map((helper) => (
+                  <HelperProfile key={helper._id} helper={helper} />
+                ))}
+              </>
+            )}
+          </>
+        )}
+      </div>
       <CatagoriesMenu />
       <h4 style={{ margin: "10px" }}>Gigs Around You!</h4>
-      <GigList />
+      <div className="gigList">
+        {loading ? (
+          <div className="loading">
+            <i className="fas fa-spinner"></i>
+          </div>
+        ) : error ? (
+          <h1>{error}</h1>
+        ) : (
+          <>
+            {typeof gigs !== "undefined" && (
+              <>
+                {gigs.map((gig) => (
+                  <GigCard key={gig._id} gig={gig} />
+                ))}
+              </>
+            )}
+          </>
+        )}
+      </div>
       <Button className="loadMore">Load More</Button>
 
       <div className="fixedButton">
@@ -61,24 +80,7 @@ const MainPage = () => {
           </MenuList>
         </Menu>
       </div>
-      <p style={{ margin: "10px" }} className="timer">
-        Last Updated: {timeDifference}
-      </p>
-      <div className="currentFeatureList">
-        <h4>Redesign on Progress,Current Features:</h4>
-        <ul>
-          <li>Navbar</li>
-          <li>Profile List</li>
-          <li>Catagories Menu</li>
-          <li>Gig List</li>
-          <li>Timer</li>
-
-          <li>
-            <i className="fa fa-circle-o-notch"></i>
-            Backend
-          </li>
-        </ul>
-      </div>
+      <CurrentFeature />
     </>
   );
 };

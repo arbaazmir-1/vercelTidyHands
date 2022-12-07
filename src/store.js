@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { gigReducer } from "./reducers/gigReducer";
+import { homePageReducer } from "./reducers/homepageReducer";
 
 const reducer = combineReducers({
-  gigList: gigReducer,
+  homePage: homePageReducer,
   // add reducers here
 });
 const initialState = {

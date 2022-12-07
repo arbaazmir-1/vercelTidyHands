@@ -4,6 +4,7 @@ const connectDB = require("../utils/db");
 const User = require("../models/userModel");
 const Gig = require("../models/gigModel");
 const dotenv = require("dotenv");
+const ActiveHelper = require("../models/activeSellerModel");
 dotenv.config();
 const users = [
   {
@@ -62,17 +63,37 @@ const gigs = [
   },
 ];
 
+const actHelp = [
+  {
+    typeOfService: ["cleaning", "cooking", "driving"],
+    latLong: [25.374432550927608, 55.470471841571275],
+    location: "Dubai",
+    noOfHires: 0,
+  },
+  {
+    typeOfService: ["cleaning", "cooking", "driving"],
+    latLong: [25.374432550927608, 55.470471841571275],
+    location: "Dubai",
+    noOfHires: 0,
+  },
+];
 connectDB();
 
 const importData = async () => {
   try {
     await User.deleteMany();
     await Gig.deleteMany();
+    await ActiveHelper.deleteMany();
+
     const user = await User.insertMany(users);
 
     const sampleGigs = gigs.map((gig) => {
       return { ...gig, buyer: user[0]._id };
     });
+    const sampleActHelp = actHelp.map((act) => {
+      return { ...act, seller: user[0]._id };
+    });
+    await ActiveHelper.insertMany(sampleActHelp);
     await Gig.insertMany(sampleGigs);
 
     console.log("Data Imported");
