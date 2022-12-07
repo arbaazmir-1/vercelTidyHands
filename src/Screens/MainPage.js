@@ -86,21 +86,20 @@ const MainPage = () => {
           <h1>{error}</h1>
         ) : (
           <>
-            {typeof gigs !== "undefined" && (
+            {typeof gigs !== "undefined" ? (
               <>
                 <h4 style={{ margin: "10px" }}>Gigs within {gigsRadius}KM</h4>
                 {gigs.map((gig) => (
                   <GigCard key={gig._id} gig={gig} />
                 ))}
               </>
-            )}
-            {typeof gigs === "undefined" && (
+            ) : (
               <div className="noGigs">
-                <h1>
-                  <i className="fas fa-exclamation-triangle"></i>
-                </h1>
                 <h1>No Gigs Found</h1>
-                <h3>Try increasing the radius</h3>
+                <p>
+                  We couldn't find any gigs near you. Try to check your location
+                  or try again later.
+                </p>
               </div>
             )}
           </>
