@@ -48,8 +48,34 @@ const CurrentFeature = () => {
           <li>Timer</li>
 
           <li>
-            <i className="fa fa-circle-o-notch"></i>
             Backend
+            <ol>
+              <li>
+                <i className="fa fa-circle-o-notch"></i>Authentication
+              </li>
+              <li>
+                <i className="fa fa-circle-o-notch"></i>Authorization
+              </li>
+              <li>
+                <i className="fa fa-circle-o-notch"></i>CRUD
+              </li>
+              <li>
+                <i className="fa fa-check"></i>
+                API
+              </li>
+              <li>
+                <i className="fa fa-check"></i>
+                Database
+              </li>
+              <li>
+                <i className="fa fa-check"></i>
+                Location Based Search
+              </li>
+              <li>
+                <i className="fa fa-check"></i>
+                Deployment Server (Vercel)
+              </li>
+            </ol>
           </li>
         </ul>
       </div>

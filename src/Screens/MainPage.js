@@ -15,7 +15,7 @@ const MainPage = () => {
 
   const homepage = useSelector((state) => state.homePage);
   const { loading, error, data } = homepage;
-  const { gigs, activeHelpers } = data;
+  const { gigs, activeHelpers, gigsRadius } = data;
 
   //get user long and lat and then dispatch action
   useEffect(() => {
@@ -53,7 +53,7 @@ const MainPage = () => {
         )}
       </div>
       <CatagoriesMenu />
-      <h4 style={{ margin: "10px" }}>Gigs Around You!</h4>
+
       <div className="gigList">
         {loading ? (
           <div className="loading">
@@ -65,6 +65,7 @@ const MainPage = () => {
           <>
             {typeof gigs !== "undefined" && (
               <>
+                <h4 style={{ margin: "10px" }}>Gigs within {gigsRadius}KM</h4>
                 {gigs.map((gig) => (
                   <GigCard key={gig._id} gig={gig} />
                 ))}
