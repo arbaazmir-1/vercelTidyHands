@@ -1,0 +1,3 @@
+export const GIG_LIST_REQUEST = "GIG_LIST_REQUEST";
+export const GIG_LIST_SUCCESS = "GIG_LIST_SUCCESS";
+export const GIG_LIST_FAIL = "GIG_LIST_FAIL";
