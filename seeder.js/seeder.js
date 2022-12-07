@@ -84,6 +84,29 @@ const gigs = [
     coords: [101.60983276367188, 4.823666572570801],
     noOfApplicants: 0,
   },
+  {
+    title: "I need a cleaner for my house Badda Bangla",
+    description: "I need a cleaner to clean my house",
+    price: 60,
+    image: "https://i.pravatar.cc/150?img=6",
+    deliveryTime: 2,
+    category: "cleaning",
+    needWithin: 6,
+
+    coords: [90.42163739752262, 23.758476258203537],
+    noOfApplicants: 0,
+  },
+  {
+    title: "আমার বাড়িতে একজন সাফ করতে হবে",
+    description: "আমার বাড়িতে একজন সাফ করতে হবে",
+    price: 70,
+    image: "https://i.pravatar.cc/150?img=7",
+    deliveryTime: 2,
+    category: "cleaning",
+    needWithin: 7,
+    coords: [90.42163739752262, 23.758476258203537],
+    noOfApplicants: 0,
+  },
 ];
 
 const actHelp = [

@@ -9,7 +9,7 @@ export default async (req, res) => {
       let { long, lat } = req.query;
       console.log(long, lat);
       await connectDB();
-      let distance = 11;
+      let distance = 20;
 
       //find gigs within 10km radius
       const gigs = await Gig.find({
