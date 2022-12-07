@@ -1,11 +1,69 @@
 //fixed button at the bottom right
 //horizontal scroll with child size 200px
+.locationAccess{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1{
+        font-size: 30px;
+        font-weight: 500;
+        margin: 10px;
+    }
+    p{
+        font-size: 15px;
+        font-weight: 500;
+        margin: 10px;
+        text-align: center;
+    }
+    button{
+        background-color: #FF6584;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 12px;
+        margin: 5px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s;
+        &:hover{
+            background-color: #E5E5E5;
+            color: black;
+        }
+    }
+}
 .profilesContainer{
     display:flex;
     flex-wrap: nowrap;
     overflow-x: auto;
 
 }
+.helperNearCard{
+    width: 200px;
+    height: 200px;
+    background-color: #FF6584;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    
+        font-size: 15px;
+        font-weight: 500;
+        
+        padding: 0.5%;
+    
+   
+
+    
+}
+
 .loading{
     width: 90%;
     margin: 0 auto;
