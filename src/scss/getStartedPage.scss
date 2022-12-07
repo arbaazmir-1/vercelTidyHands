@@ -1,0 +1,77 @@
+.mainContainerGetStarted{
+    height: 100vh;
+    .img{
+        padding: 5%;
+    }
+    .formContainer{
+        padding: 5%;
+        h2{
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        form{
+            padding: 5%;
+            button{
+                width: 100%;
+                margin-top: 1rem;
+                background-color: #FF6584 !important;
+                transition: background-color 0.5s ease;
+                &:hover{
+                    color: white;
+                    background-color: gray !important;
+                }
+            }
+            input{
+                background-color: white;
+            }
+            p{
+                font-size: 0.8rem;
+                margin: 0.5rem;
+                text-align: center;
+                a{
+                    color: #FF6584;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: color 0.5s ease;
+                    &:hover{
+                        color: gray;
+                    }
+                }
+            }
+            
+        }
+        
+
+    }
+    .bottomSection{
+       //this is the bottom triangle shape background
+        background-color: #CDBEFF;
+        height: 50vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        clip-path: polygon(0 0, 0% 100%, 100% 100%, 0 50%);
+
+        
+
+
+
+
+
+        
+        
+        
+
+        
+       
+
+
+
+        
+       
+    }
+}

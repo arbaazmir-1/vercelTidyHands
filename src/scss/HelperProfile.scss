@@ -1,0 +1,54 @@
+.helperProfileCard{
+    width: 200px;
+    
+    margin: 10px ;
+    border-radius: 10px;
+    background-color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+   
+    
+   
+    .helperProfileCardImage{
+        width: 100%;
+        
+    
+        border-radius: 5px;
+        img{
+            width: 100%;
+            
+            object-fit: cover;
+            border-radius: 5px;
+            
+        }
+        
+    }
+    
+    .helperProfileRating{
+
+        bottom: 25px;
+        right: 0px;
+        background-color: #FFFFFF70;
+        border-radius: 0px 0px 5px 5px;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        color:#FF6584;
+        
+       
+        
+    }
+    .helperProfileInfo{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        
+    }
+    button{
+        width: 100%;
+        background-color: #FF6584 !important;
+    }
+
+}

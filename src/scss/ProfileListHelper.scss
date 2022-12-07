@@ -1,0 +1,7 @@
+//horizontal scroll with child size 200px
+.profilesContainer{
+    display:flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+}

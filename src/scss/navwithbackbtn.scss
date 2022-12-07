@@ -1,0 +1,24 @@
+.nav-with-back-btn{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #F2F2F2;
+    .back-btn{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .fa-arrow-left{
+            font-size: 20px;
+            color: black;
+            margin-right: 10px;
+        }
+        .back-btn-text{
+            font-size: 20px;
+            color: black;
+        }
+    }
+
+
+}

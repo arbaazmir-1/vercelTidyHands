@@ -1,0 +1,41 @@
+h2{
+    margin: 10px;
+    width: 100%;
+    padding: 10px;
+
+}
+.catagories{
+    display: flex;
+    overflow-x: auto;
+    
+    .iconContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        cursor: pointer;
+        .icon{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #F2F2F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            .fa{
+                font-size: 30px;
+            }
+        }
+        .catagoryName{
+            font-size: 12px;
+            font-weight: 500;
+        }
+        &:hover{
+            .icon{
+                background-color: #E5E5E5;
+            }
+        }
+    }
+}

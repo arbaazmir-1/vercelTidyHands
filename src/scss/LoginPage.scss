@@ -1,0 +1,106 @@
+.loginPage{
+    height: 100vh;
+    .logoLoginPage{
+        
+        img{
+            padding:5%;    
+        }
+        h2{
+            padding:5%;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+    }
+    .formLoginPage{
+        padding: 5%;
+       
+        form{
+            padding: 5%;
+            button{
+                width: 100%;
+                margin-top: 1rem;
+                background-color: #FF6584 !important;
+                transition: background-color 0.5s ease;
+                &:hover{
+                    color: white;
+                    background-color: gray !important;
+                }
+            }
+            input{
+                background-color: white;
+            }
+            p{
+                font-size: 0.8rem;
+                margin: 0.5rem;
+                text-align: center;
+                a{
+                    color: #FF6584;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: color 0.5s ease;
+                    &:hover{
+                        color: gray;
+                    }
+                }
+            }
+            
+            
+        }
+        
+        button{
+            width: 100%;
+            margin-top: 1rem;
+            background-color: #FF6584 !important;
+            transition: background-color 0.5s ease;
+            color: white;
+            &:hover{
+                color: white;
+                background-color: gray !important;
+            }
+        }
+        
+        
+    }
+    a{
+        
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.5s ease;
+        text-align: center;
+        &:hover{
+            color: gray;
+        }
+
+    }
+    .forgotPassword{
+        padding: 5%;
+        text-align: center;
+        a{
+            color: #FF6584;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.5s ease;
+            &:hover{
+                color: gray;
+            }
+        }
+    }
+    .backgroundSvg{
+        //this is the bottom triangle shape background
+        background-color: #CDBEFF;
+        height: 50vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        clip-path: polygon(0 0, 0% 100%, 100% 100%, 0 50%);
+
+    }
+
+}

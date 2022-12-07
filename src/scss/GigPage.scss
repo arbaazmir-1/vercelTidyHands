@@ -1,0 +1,152 @@
+.GigPage{
+    height: 70vh;
+    overflow: scroll;
+
+    .gigCardPage{
+        width: 95%;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: #F2F2F2;
+        padding: 2%;
+        border: 0.05px solid #00000080;
+        border-radius: 5px;
+        .gigIconContainerPage{
+            width: 20%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FF97AC;
+            padding: 5%;
+            border-radius: 10px;
+
+            i{
+                font-size: 30px;
+                color: #00000080;
+            }
+        }
+        .gigCardInfoPage{
+            width: 65%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            
+            h2{
+                font-size: 20px;
+                font-weight: 300;
+                margin: 0;
+                padding: 0;
+            }
+            p{
+                font-size: 15px;
+                font-weight: 300;
+                margin: 5px 0px;
+            }
+        }
+        .priceContainer{
+            align-self: flex-end;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            p{
+                font-size: 20px;
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+            }
+        }
+        
+    }
+    .gigCardPageDescription{
+        width: 95%;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #F2F2F2;
+        padding: 2%;
+        border: 0.05px solid #00000080;
+        border-radius: 5px;
+        h2{
+            font-size: 20px;
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            font-size: 15px;
+            font-weight: 300;
+            margin: 5px 0px;
+        }
+    }
+    .mapContainer{
+        width: 95%;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #F2F2F2;
+        padding: 2%;
+        border: 0.05px solid #00000080;
+        border-radius: 5px;
+        button{
+            width: 100%;
+            height: 50px;
+            background-color: #FF97AC;
+            border: none;
+            border-radius: 5px;
+            color: #00000080;
+            font-size: 20px;
+            font-weight: 300;
+            margin: 10px 0px;
+        }
+    }
+    
+
+//this section will be at the bottom of the page
+.footerSection{
+    width: 100%;
+    height: 100px;
+    background-color: #FF97AC;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px 10px 0 0;
+    button{
+        width: 40%;
+        height: 50px;
+        background-color: #fff;
+        
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 300;
+        color: #FF97AC;
+        transition: all 0.5s;
+        &:hover{
+            background-color: #F2F2F2;
+            color: #000000;
+            transform: translateY(-5px);
+            
+        }
+        
+    }
+    
+    
+
+
+
+}
+
+
+}
