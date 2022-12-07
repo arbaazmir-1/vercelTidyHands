@@ -18,24 +18,8 @@ const MainPage = () => {
   const { loading, error, data } = homepage;
   const { gigs, activeHelpers, gigsRadius } = data;
 
-  const [accessLocation, setAccessLocation] = React.useState("denied");
-  //ask user to turn on location on mobile device
-
-  //check if user has location on
-  const checkLocationService = async () => {
-    let result = await navigator.permissions.query({ name: "geolocation" });
-    if (result.state === "granted") {
-      setAccessLocation("granted");
-    } else if (result.state === "undefined") {
-      setAccessLocation("unknown");
-    } else if (result.state === "denied") {
-      setAccessLocation("denied");
-    }
-  };
-
   //get user long and lat and then dispatch action
   const locationBasedApiCall = () => {
-    checkLocationService();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
@@ -52,13 +36,12 @@ const MainPage = () => {
   return (
     <>
       <NavbarMobile />
-
       {loading ? (
         <div className="loading">
-          <i className="fas fa-spinner"></i>
+          <i className="fa fa-spinner fa-spin"></i>
         </div>
       ) : error ? (
-        <h1>{error}</h1>
+        <div className="error">{error}</div>
       ) : (
         <>
           {typeof activeHelpers !== "undefined" && (
@@ -74,52 +57,37 @@ const MainPage = () => {
           )}
         </>
       )}
-
       <CatagoriesMenu />
-
       <div className="gigList">
         {loading ? (
           <div className="loading">
-            <i className="fas fa-spinner"></i>
+            <i className="fa fa-spinner fa-spin"></i>
           </div>
         ) : error ? (
-          <h1>{error}</h1>
+          <div className="error">{error}</div>
         ) : (
           <>
             {typeof gigs !== "undefined" ? (
               <>
-                <h4 style={{ margin: "10px" }}>Gigs within {gigsRadius}KM</h4>
+                <h4 style={{ margin: "10px" }} className="gigListCard">
+                  Gigs Near You
+                </h4>
                 {gigs.map((gig) => (
                   <GigCard key={gig._id} gig={gig} />
                 ))}
               </>
             ) : (
               <div className="noGigs">
-                <h1>No Gigs Found</h1>
-                <p>
-                  We couldn't find any gigs near you. Try to check your location
-                  or try again later.
-                </p>
+                <h4>No Gigs Found</h4>
               </div>
             )}
           </>
         )}
       </div>
-      <Button className="loadMore">Load More</Button>
 
-      <div className="fixedButton">
-        <Menu>
-          <MenuButton as={Button} className="buttonFixed">
-            <i className="fa fa-plus"></i>
-          </MenuButton>
-          <MenuList>
-            <MenuItem>Create a New Gig</MenuItem>
-            <MenuItem>Offer Services</MenuItem>
-            <MenuItem>Report Bug</MenuItem>
-          </MenuList>
-        </Menu>
+      <div className="currentFeature">
+        <CurrentFeature />
       </div>
-      <CurrentFeature />
     </>
   );
 };
