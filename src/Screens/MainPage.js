@@ -26,7 +26,9 @@ const MainPage = () => {
     let result = await navigator.permissions.query({ name: "geolocation" });
     if (result.state === "granted") {
       setAccessLocation("granted");
-    } else {
+    } else if (result.state === "undefined") {
+      setAccessLocation("unknown");
+    } else if (result.state === "denied") {
       setAccessLocation("denied");
     }
   };
@@ -50,15 +52,6 @@ const MainPage = () => {
   return (
     <>
       <NavbarMobile />
-      {accessLocation === "denied" && (
-        <div className="noGigs">
-          <h1>
-            <i className="fas fa-exclamation-triangle"></i>
-          </h1>
-          <h1>Location Access Denied</h1>
-          <h3>Please turn on location access to see active helpers</h3>
-        </div>
-      )}
 
       {loading ? (
         <div className="loading">
@@ -101,24 +94,14 @@ const MainPage = () => {
                 ))}
               </>
             )}
-            {accessLocation === "denied" ? (
+            {typeof gigs === "undefined" && (
               <div className="noGigs">
                 <h1>
                   <i className="fas fa-exclamation-triangle"></i>
                 </h1>
-                <h1>Location Access Denied</h1>
-                <h3>Please turn on location access to see gigs near you</h3>
+                <h1>No Gigs Found</h1>
+                <h3>Try increasing the radius</h3>
               </div>
-            ) : (
-              typeof gigs === "undefined" && (
-                <div className="noGigs">
-                  <h1>
-                    <i className="fas fa-exclamation-triangle"></i>
-                  </h1>
-                  <h1>No Gigs Found</h1>
-                  <h3>Try increasing the radius</h3>
-                </div>
-              )
             )}
           </>
         )}
