@@ -22,8 +22,8 @@ const MainPage = () => {
   const locationBasedApiCall = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const long = 23.88586155864047;
-        const lat = 90.25955967926366;
+        const long = position.coords.longitude;
+        const lat = position.coords.latitude;
 
         dispatch(homepageAction({ long, lat }));
       });
