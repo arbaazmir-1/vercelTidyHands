@@ -16,7 +16,12 @@ const MainPage = () => {
 
   const homepage = useSelector((state) => state.homePage);
   const { loading, error, data } = homepage;
-  const { gigs, activeHelpers, gigsRadius } = data;
+  let gigs, activeHelpers, gigsRadius;
+  if (data) {
+    gigs = data.gigs;
+    activeHelpers = data.activeHelpers;
+    gigsRadius = data.gigsRadius;
+  }
 
   //get user long and lat and then dispatch action
   const locationBasedApiCall = () => {
@@ -25,7 +30,7 @@ const MainPage = () => {
         const long = position.coords.longitude;
         const lat = position.coords.latitude;
 
-        dispatch(homepageAction({ long, lat }));
+        dispatch(homepageAction({ lat, long }));
       });
     }
   };
@@ -68,7 +73,7 @@ const MainPage = () => {
           <div className="error">{error}</div>
         ) : (
           <>
-            {typeof gigs !== "undefined" && gigs.length > 0 ? (
+            {gigs ? (
               <>
                 <h4 style={{ margin: "10px" }} className="gigListCard">
                   Gigs Near You
