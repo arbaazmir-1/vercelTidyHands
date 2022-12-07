@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 const GigCard = (props) => {
   const { gig } = props;
-  let lat1 = gig.coords[0];
-  let long1 = gig.coords[1];
+  let lat1 = gig.coords[1];
+  let long1 = gig.coords[0];
   const [distance, setDistance] = useState(0);
   //measure distance between user and gig
   useEffect(() => {

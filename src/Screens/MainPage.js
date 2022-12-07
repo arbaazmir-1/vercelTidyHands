@@ -30,6 +30,12 @@ const MainPage = () => {
         const long = position.coords.longitude;
         const lat = position.coords.latitude;
         //check if lang and lat are correct
+        // const long = 101.60983276367188;
+        // const lat = 4.823666572570801;
+        if (lat > 90 || lat < -90 || long > 180 || long < -180) {
+          alert("Please check your location settings");
+          return;
+        }
 
         dispatch(homepageAction({ long, lat }));
       });

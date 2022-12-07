@@ -39,6 +39,7 @@ const gigSchema = new Schema({
   coords: {
     type: [Number],
     index: "2dsphere",
+    required: true,
   },
   noOfApplicants: {
     type: Number,

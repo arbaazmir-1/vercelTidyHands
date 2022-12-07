@@ -36,7 +36,7 @@ const gigs = [
     deliveryTime: 2,
     category: "cleaning",
     needWithin: 2,
-    coords: [25.370535428138616, 55.4788618475773],
+    coords: [55.4788618475773, 25.424286330646822],
     noOfApplicants: 0,
   },
   {
@@ -47,7 +47,7 @@ const gigs = [
     deliveryTime: 2,
     category: "cooking",
     needWithin: 1,
-    coords: [25.424286330646822, 55.56713445537544],
+    coords: [55.4788618475773, 25.424286330646822],
     noOfApplicants: 3,
   },
   {
@@ -58,22 +58,45 @@ const gigs = [
     deliveryTime: 2,
     category: "driving",
     needWithin: 3,
-    coords: [25.370535428138616, 55.4788618475773],
+    coords: [55.4788618475773, 25.424286330646822],
     noOfApplicants: 8,
+  },
+  {
+    title: "I need a gardener",
+    description: "I need a gardener to garden my garden",
+    price: 40,
+    image: "https://i.pravatar.cc/150?img=4",
+    deliveryTime: 2,
+    category: "gardening",
+    needWithin: 4,
+
+    coords: [101.60983276367188, 4.823666572570801],
+    noOfApplicants: 0,
+  },
+  {
+    title: "I need a cleaner for my car",
+    description: "I need a cleaner to clean my car",
+    price: 50,
+    image: "https://i.pravatar.cc/150?img=5",
+    deliveryTime: 2,
+    category: "cleaning",
+    needWithin: 5,
+    coords: [101.60983276367188, 4.823666572570801],
+    noOfApplicants: 0,
   },
 ];
 
 const actHelp = [
   {
     typeOfService: ["cleaning", "cooking", "driving"],
-    latLong: [25.370535428138616, 55.4788618475773],
+    coords: [55.4788618475773, 25.424286330646822],
     location: "Dubai",
     noOfHires: 0,
     price: 10,
   },
   {
     typeOfService: ["cleaning", "cooking", "driving"],
-    latLong: [25.370535428138616, 55.4788618475773],
+    coords: [55.4788618475773, 25.424286330646822],
     location: "Dubai",
     noOfHires: 0,
     price: 20,
@@ -110,6 +133,7 @@ const destroyData = async () => {
     await User.deleteMany();
     await Gig.deleteMany();
 
+    await ActiveHelper.deleteMany();
     console.log("Data Destroyed");
     process.exit();
   } catch (error) {

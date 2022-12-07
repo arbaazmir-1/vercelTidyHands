@@ -17,7 +17,7 @@ export default async (req, res) => {
           $near: {
             $geometry: {
               type: "Point",
-              spherical: true,
+
               coordinates: [long, lat],
             },
             $maxDistance: distance * 1000,
@@ -40,7 +40,8 @@ export default async (req, res) => {
 
       res.json(data);
     } catch (err) {
-      res.status(500).json({ message: err });
+      let error = err;
+      res.status(500).json({ error });
     }
   } else if (requestType === "POST") {
     dbConnect();
