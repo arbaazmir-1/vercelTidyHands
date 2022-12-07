@@ -29,6 +29,8 @@ const MainPage = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
         const lat = position.coords.latitude;
+        // const long = 3.355372428894043;
+        // const lat = 101.62648010253906;
 
         dispatch(homepageAction({ lat, long }));
       });
@@ -73,23 +75,27 @@ const MainPage = () => {
           <div className="error">{error}</div>
         ) : (
           <>
-            {typeof gigs !== "undefined" ? (
+            {typeof gigs !== "undefined" && (
               <>
                 <h4 style={{ margin: "10px" }} className="gigListCard">
                   Gigs Near You
                 </h4>
-                {gigs.map((gig) => (
-                  <GigCard key={gig._id} gig={gig} />
-                ))}
+                {gigs.length > 0 ? (
+                  <div className="gigListContainer">
+                    {gigs.map((gig) => (
+                      <GigCard key={gig._id} gig={gig} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="noGigs">
+                    <h4>No Gigs Found</h4>
+                    <p>
+                      Try changing your location or search for a different
+                      category
+                    </p>
+                  </div>
+                )}
               </>
-            ) : (
-              <div className="noGigs">
-                <h4>No Gigs Found</h4>
-                <p>
-                  Try increasing your search radius or check your location
-                  settings.
-                </p>
-              </div>
             )}
           </>
         )}
