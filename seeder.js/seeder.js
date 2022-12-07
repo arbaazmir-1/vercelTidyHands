@@ -36,7 +36,7 @@ const gigs = [
     deliveryTime: 2,
     category: "cleaning",
     needWithin: 2,
-    latLong: [25.374432550927608, 55.470471841571275],
+    coords: [25.370535428138616, 55.4788618475773],
     noOfApplicants: 0,
   },
   {
@@ -47,7 +47,7 @@ const gigs = [
     deliveryTime: 2,
     category: "cooking",
     needWithin: 1,
-    latLong: [25.374432550927608, 55.470471841571275],
+    coords: [25.424286330646822, 55.56713445537544],
     noOfApplicants: 3,
   },
   {
@@ -58,7 +58,7 @@ const gigs = [
     deliveryTime: 2,
     category: "driving",
     needWithin: 3,
-    latLong: [25.374432550927608, 55.470471841571275],
+    coords: [25.370535428138616, 55.4788618475773],
     noOfApplicants: 8,
   },
 ];
@@ -66,15 +66,17 @@ const gigs = [
 const actHelp = [
   {
     typeOfService: ["cleaning", "cooking", "driving"],
-    latLong: [25.374432550927608, 55.470471841571275],
+    latLong: [25.370535428138616, 55.4788618475773],
     location: "Dubai",
     noOfHires: 0,
+    price: 10,
   },
   {
     typeOfService: ["cleaning", "cooking", "driving"],
-    latLong: [25.374432550927608, 55.470471841571275],
+    latLong: [25.370535428138616, 55.4788618475773],
     location: "Dubai",
     noOfHires: 0,
+    price: 20,
   },
 ];
 connectDB();

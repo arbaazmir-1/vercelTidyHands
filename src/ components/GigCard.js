@@ -6,53 +6,31 @@ import { useEffect, useState } from "react";
 
 const GigCard = (props) => {
   const { gig } = props;
-  let lat1 = gig.latLong[0];
-  let long1 = gig.latLong[1];
-
-  const [userLocation, setUserLocation] = useState({
-    lat2: 0,
-    long2: 0,
-  });
+  let lat1 = gig.coords[0];
+  let long1 = gig.coords[1];
   const [distance, setDistance] = useState(0);
-
-  //get user longitude and latitude
-  const getLocation = () => {
+  //measure distance between user and gig
+  useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setUserLocation({
-          lat2: position.coords.latitude,
-          long2: position.coords.longitude,
-        });
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  };
-  //calculate distance between user and gig
-  const getDistance = (lat1, lon1, lat2, lon2) => {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2 - lat1); // deg2rad below
-    var dLon = deg2rad(lon2 - lon1);
-    var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) *
-        Math.cos(deg2rad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c; // Distance in km
-    return d;
-  };
-  function deg2rad(deg) {
-    return deg * (Math.PI / 180);
-  }
+        const long2 = position.coords.longitude;
+        const lat2 = position.coords.latitude;
+        const R = 6371e3; // metres
+        const φ1 = (lat1 * Math.PI) / 180; // φ, λ in radians
+        const φ2 = (lat2 * Math.PI) / 180;
+        const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+        const Δλ = ((long2 - long1) * Math.PI) / 180;
 
-  useEffect(() => {
-    getLocation();
-    setDistance(
-      getDistance(lat1, long1, userLocation.lat2, userLocation.long2).toFixed(1)
-    );
-  }, []);
+        const a =
+          Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+          Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        const d = R * c; // in metres
+        setDistance(Math.round(d / 1000));
+      });
+    }
+  }, [lat1, long1]);
 
   return (
     <>

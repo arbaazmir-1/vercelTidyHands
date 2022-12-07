@@ -36,9 +36,9 @@ const gigSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  latLong: {
+  coords: {
     type: [Number],
-    required: true,
+    index: "2dsphere",
   },
   noOfApplicants: {
     type: Number,

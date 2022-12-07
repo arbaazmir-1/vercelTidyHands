@@ -13,14 +13,21 @@ import HelperProfile from "../ components/HelperProfile";
 const MainPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(homepageAction());
-  }, [dispatch]);
-
   const homepage = useSelector((state) => state.homePage);
   const { loading, error, data } = homepage;
   const { gigs, activeHelpers } = data;
-  const arrayOne = [1, 2, 3, 4, 5, 6];
+
+  //get user long and lat and then dispatch action
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const long = position.coords.longitude;
+        const lat = position.coords.latitude;
+        console.log(long, lat);
+        dispatch(homepageAction({ long, lat }));
+      });
+    }
+  }, [dispatch]);
 
   return (
     <>
