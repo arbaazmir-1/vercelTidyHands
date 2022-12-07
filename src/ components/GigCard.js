@@ -45,7 +45,7 @@ const GigCard = (props) => {
           </p>
           <h4>${gig.price}/Hour</h4>
         </div>
-        <Link to="/gig">
+        <Link to={"/gig/" + gig._id}>
           <button>View</button>
         </Link>
       </div>

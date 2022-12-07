@@ -20,7 +20,7 @@ function App() {
             <Route path="/main" element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/helperprofile" element={<HelpersProfilePage />} />
-            <Route path="/gig" element={<GigPage />} />
+            <Route path="/gig/:id" element={<GigPage />} />
           </Routes>
         </ScrollToTop>
       </main>

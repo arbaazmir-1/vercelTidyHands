@@ -88,6 +88,7 @@
     }
     .mapContainer{
         width: 95%;
+        
         margin: 20px auto;
         display: flex;
         flex-direction: column;
@@ -97,9 +98,14 @@
         padding: 2%;
         border: 0.05px solid #00000080;
         border-radius: 5px;
+        img{
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+        }
         button{
             width: 100%;
-            height: 50px;
+            height: 40px;
             background-color: #FF97AC;
             border: none;
             border-radius: 5px;

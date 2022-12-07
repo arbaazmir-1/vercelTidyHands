@@ -2,7 +2,10 @@ import React from "react";
 import "../scss/GigPage.scss";
 import NavWithBackBtn from "../ components/NavWithBackBtn";
 import { Button } from "@chakra-ui/react";
+
 const GigPage = () => {
+  let MAB_BOX_TOKEN = process.env.REACT_APP_MAP_BOX_TOKEN;
+
   return (
     <>
       <NavWithBackBtn />
@@ -38,8 +41,8 @@ const GigPage = () => {
         <div className="mapContainer">
           <img
             src={
-              "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/[-77.043686,38.892035,-77.028923,38.904192]/400x400?access_token=" +
-              "pk.eyJ1IjoiYXJiYWF6bWlyIiwiYSI6ImNsYjlwYm80NjAzYWYzbnFkemJsbmJ0aWEifQ.VT3jINrWalknubBpISn37w"
+              "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/90.4488,23.7665,12,0/500x500?access_token=" +
+              process.env.REACT_APP_MAP_BOX_TOKEN
             }
             alt="location map"
           />
