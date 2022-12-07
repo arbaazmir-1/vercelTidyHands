@@ -18,18 +18,18 @@ const MainPage = () => {
   const { loading, error, data } = homepage;
   const { gigs, activeHelpers, gigsRadius } = data;
 
-  const [accessLocation, setAccessLocation] = React.useState("denied");
-  //ask user to turn on location on mobile device
+  // const [accessLocation, setAccessLocation] = React.useState("denied");
+  // //ask user to turn on location on mobile device
 
-  //check if user has location on
-  const checkLocationService = async () => {
-    let result = await navigator.permissions.query({ name: "geolocation" });
-    if (result.state === "granted") {
-      setAccessLocation("granted");
-    } else {
-      setAccessLocation("denied");
-    }
-  };
+  // //check if user has location on
+  // const checkLocationService = async () => {
+  //   let result = await navigator.permissions.query({ name: "geolocation" });
+  //   if (result.state === "granted") {
+  //     setAccessLocation("granted");
+  //   } else {
+  //     setAccessLocation("denied");
+  //   }
+  // };
 
   //get user long and lat and then dispatch action
   const locationBasedApiCall = () => {
@@ -40,18 +40,15 @@ const MainPage = () => {
 
         dispatch(homepageAction({ long, lat }));
       });
-    } else {
-      setAccessLocation("denied");
     }
   };
   useEffect(() => {
-    checkLocationService();
     locationBasedApiCall();
-  }, [dispatch, accessLocation]);
+  }, [dispatch]);
 
   return (
     <>
-      {accessLocation === "denied" && (
+      {/* {accessLocation === "denied" && (
         <div className="locationAccess">
           <h1>Location Access Denied</h1>
           <p>
@@ -61,73 +58,83 @@ const MainPage = () => {
         </div>
       )}
       {accessLocation === "granted" && (
+        <> */}
+      <NavbarMobile />
+
+      {loading ? (
+        <div className="loading">
+          <i className="fas fa-spinner"></i>
+        </div>
+      ) : error ? (
+        <h1>{error}</h1>
+      ) : (
         <>
-          <NavbarMobile />
+          {typeof activeHelpers !== "undefined" && (
+            <div className="profilesContainer">
+              <h4 style={{ margin: "10px" }} className="helperNearCard">
+                Helpers Near You
+              </h4>
 
-          {loading ? (
-            <div className="loading">
-              <i className="fas fa-spinner"></i>
+              {activeHelpers.map((helper) => (
+                <HelperProfile key={helper._id} helper={helper} />
+              ))}
             </div>
-          ) : error ? (
-            <h1>{error}</h1>
-          ) : (
-            <>
-              {typeof activeHelpers !== "undefined" && (
-                <div className="profilesContainer">
-                  <h4 style={{ margin: "10px" }} className="helperNearCard">
-                    Helpers Near You
-                  </h4>
-
-                  {activeHelpers.map((helper) => (
-                    <HelperProfile key={helper._id} helper={helper} />
-                  ))}
-                </div>
-              )}
-            </>
           )}
-
-          <CatagoriesMenu />
-
-          <div className="gigList">
-            {loading ? (
-              <div className="loading">
-                <i className="fas fa-spinner"></i>
-              </div>
-            ) : error ? (
-              <h1>{error}</h1>
-            ) : (
-              <>
-                {typeof gigs !== "undefined" && (
-                  <>
-                    <h4 style={{ margin: "10px" }}>
-                      Gigs within {gigsRadius}KM
-                    </h4>
-                    {gigs.map((gig) => (
-                      <GigCard key={gig._id} gig={gig} />
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </div>
-          <Button className="loadMore">Load More</Button>
-
-          <div className="fixedButton">
-            <Menu>
-              <MenuButton as={Button} className="buttonFixed">
-                <i className="fa fa-plus"></i>
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Create a New Gig</MenuItem>
-                <MenuItem>Offer Services</MenuItem>
-                <MenuItem>Report Bug</MenuItem>
-              </MenuList>
-            </Menu>
-          </div>
-          <CurrentFeature />
         </>
       )}
+
+      <CatagoriesMenu />
+
+      <div className="gigList">
+        {loading ? (
+          <div className="loading">
+            <i className="fas fa-spinner"></i>
+          </div>
+        ) : error ? (
+          <h1>{error}</h1>
+        ) : (
+          <>
+            {typeof gigs !== "undefined" && (
+              <>
+                <h4 style={{ margin: "10px" }}>Gigs within {gigsRadius}KM</h4>
+                {gigs.map((gig) => (
+                  <GigCard key={gig._id} gig={gig} />
+                ))}
+              </>
+            )}
+            {typeof gigs === "undefined" && (
+              <div className="noGigs">
+                <h1>No Gigs Found</h1>
+                <p>
+                  There are no gigs within {gigsRadius}KM of your location. Try
+                  increasing the radius
+                </p>
+                <Link to="/gigs">
+                  <Button className="button">Find Gigs</Button>
+                </Link>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <Button className="loadMore">Load More</Button>
+
+      <div className="fixedButton">
+        <Menu>
+          <MenuButton as={Button} className="buttonFixed">
+            <i className="fa fa-plus"></i>
+          </MenuButton>
+          <MenuList>
+            <MenuItem>Create a New Gig</MenuItem>
+            <MenuItem>Offer Services</MenuItem>
+            <MenuItem>Report Bug</MenuItem>
+          </MenuList>
+        </Menu>
+      </div>
+      <CurrentFeature />
     </>
+    //   )}
+    // </>
   );
 };
 
