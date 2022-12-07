@@ -22,8 +22,8 @@ const MainPage = () => {
   const locationBasedApiCall = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const long = position.coords.longitude;
-        const lat = position.coords.latitude;
+        const long = 23.88586155864047;
+        const lat = 90.25955967926366;
 
         dispatch(homepageAction({ long, lat }));
       });
@@ -45,15 +45,16 @@ const MainPage = () => {
       ) : (
         <>
           {typeof activeHelpers !== "undefined" && (
-            <div className="profilesContainer">
-              <h4 style={{ margin: "10px" }} className="helperNearCard">
+            <>
+              <h4 style={{ margin: "10px" }} className="gigListCard">
                 Helpers Near You
               </h4>
-
-              {activeHelpers.map((helper) => (
-                <HelperProfile key={helper._id} helper={helper} />
-              ))}
-            </div>
+              <div className="profilesContainer">
+                {activeHelpers.map((helper) => (
+                  <HelperProfile key={helper._id} helper={helper} />
+                ))}
+              </div>
+            </>
           )}
         </>
       )}
@@ -67,7 +68,7 @@ const MainPage = () => {
           <div className="error">{error}</div>
         ) : (
           <>
-            {typeof gigs !== "undefined" ? (
+            {typeof gigs !== "undefined" && gigs.length > 0 ? (
               <>
                 <h4 style={{ margin: "10px" }} className="gigListCard">
                   Gigs Near You
@@ -79,6 +80,10 @@ const MainPage = () => {
             ) : (
               <div className="noGigs">
                 <h4>No Gigs Found</h4>
+                <p>
+                  Try increasing your search radius or check your location
+                  settings.
+                </p>
               </div>
             )}
           </>
