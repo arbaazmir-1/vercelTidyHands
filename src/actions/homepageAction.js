@@ -19,6 +19,10 @@ export const homepageAction =
         },
       };
 
+      // const { data } = await axios.get(
+      //   "/api/gigs/fetch?long=" + long + "&lat=" + lat + "" ,
+
+      // );
       const { data } = await axios.get(
         "/api/gigs/fetch?long=" + long + "&lat=" + lat + "",
         config

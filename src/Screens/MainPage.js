@@ -17,11 +17,8 @@ const MainPage = () => {
   const { loading, data } = homepage;
 
   const userLogin = useSelector((state) => state.userLogin);
-  let userInfo, token;
-  if (userLogin) {
-    userInfo = userLogin.userInfo;
-    token = userLogin.token;
-  }
+  const { userInfo } = userLogin;
+  const { token } = userInfo;
 
   let gigs, activeHelpers, gigsRadius, error;
   if (data) {
