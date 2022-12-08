@@ -2,26 +2,51 @@ import React from "react";
 import NavbarMobile from "../ components/NavbarMobile";
 import CatagoriesMenu from "../ components/CatagoriesMenu";
 import { useEffect } from "react";
-import { Button } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import GigCard from "../ components/GigCard";
 import { useSelector, useDispatch } from "react-redux";
 import { homepageAction } from "../actions/homepageAction";
 import CurrentFeature from "../ components/currentFeature";
 import HelperProfile from "../ components/HelperProfile";
-import { detectBrowser } from "../detectBrower";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+
 const MainPage = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const homepage = useSelector((state) => state.homePage);
-  const { loading, error, data } = homepage;
-  let gigs, activeHelpers, gigsRadius;
+  const { loading, data } = homepage;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  let userInfo, token;
+  if (userLogin) {
+    userInfo = userLogin.userInfo;
+    token = userLogin.token;
+  }
+
+  let gigs, activeHelpers, gigsRadius, error;
   if (data) {
     gigs = data.gigs;
     activeHelpers = data.activeHelpers;
     gigsRadius = data.gigsRadius;
+    error = data.error;
   }
+  //push to "/" route if error === "Not authorized, no token"
+  // if (error === "Not authorized, no token") {
+  //   //show toast message
+  //   toast.error("Please login to continue", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
+  //   // set delay to 3 seconds
+  //   setTimeout(() => {
+  //     navigate("/");
+  //   }, 3000);
+  // }
 
   //get user long and lat and then dispatch action
   const locationBasedApiCall = () => {
@@ -33,11 +58,10 @@ const MainPage = () => {
         // const long = 101.60983276367188;
         // const lat = 4.823666572570801;
         if (lat > 90 || lat < -90 || long > 180 || long < -180) {
-          alert("Please check your location settings");
           return;
         }
 
-        dispatch(homepageAction({ long, lat }));
+        dispatch(homepageAction({ long, lat, token }));
       });
     }
   };
@@ -45,9 +69,17 @@ const MainPage = () => {
     locationBasedApiCall();
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/");
+    }
+  }, [userInfo]);
+
   return (
     <>
       <NavbarMobile />
+      <ToastContainer />
+
       {loading ? (
         <div className="loading">
           <i className="fa fa-spinner fa-spin"></i>

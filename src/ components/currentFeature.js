@@ -51,7 +51,7 @@ const CurrentFeature = () => {
             Backend
             <ol>
               <li>
-                <i className="fa fa-circle-o-notch"></i>Authentication
+                <i className="fa fa-check"></i>Authentication
               </li>
               <li>
                 <i className="fa fa-circle-o-notch"></i>Authorization

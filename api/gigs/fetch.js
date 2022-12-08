@@ -2,7 +2,10 @@ import connectDB from "../../utils/db";
 import Gig from "../../models/gigModel";
 import User from "../../models/userModel";
 import ActiveHelper from "../../models/activeSellerModel";
+const { protect } = require("../../utils/authMiddleware");
+
 export default async (req, res) => {
+  await protect(req, res);
   let requestType = req.method;
   if (requestType === "GET") {
     try {

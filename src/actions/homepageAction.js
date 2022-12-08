@@ -6,13 +6,22 @@ import {
 import axios from "axios";
 
 export const homepageAction =
-  ({ long, lat }) =>
+  ({ long, lat, token }) =>
   async (dispatch) => {
     try {
       dispatch({ type: HOME_PAGE_REQUEST });
 
+      //set header for authorization
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
       const { data } = await axios.get(
-        "/api/gigs/fetch?long=" + long + "&lat=" + lat + ""
+        "/api/gigs/fetch?long=" + long + "&lat=" + lat + "",
+        config
       );
 
       dispatch({

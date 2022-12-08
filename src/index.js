@@ -6,11 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import store from "./store";
 import { Provider } from "react-redux";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ChakraProvider>
+      <ToastContainer />
       <App />
     </ChakraProvider>
   </Provider>

@@ -41,7 +41,7 @@ const GigPage = () => {
         <div className="mapContainer">
           <img
             src={
-              "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/90.4488,23.7665,12,0/500x500?access_token=" +
+              "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+555555(90.5831,23.7727),pin-l+ec0909(90.5831,23.7727)/90.5831,23.7727,12.91,0/500x500?access_token=" +
               process.env.REACT_APP_MAP_BOX_TOKEN
             }
             alt="location map"
