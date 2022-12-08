@@ -49,7 +49,8 @@ const loginUser = async (req, res) => {
           token: generateToken(user._id),
         });
       } else {
-        res.status(401);
+        const statusCode = res.statusCode === 200 ? 401 : res.statusCode;
+        res.status(statusCode);
         res.json({
           message: "Invalid email or password",
         });
