@@ -18,7 +18,6 @@ const MainPage = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const { token } = userInfo;
 
   let gigs, activeHelpers, gigsRadius, error;
   if (data) {
@@ -46,7 +45,7 @@ const MainPage = () => {
   // }
 
   //get user long and lat and then dispatch action
-  const locationBasedApiCall = () => {
+  const locationBasedApiCall = (token) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
@@ -63,7 +62,11 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    locationBasedApiCall();
+    if (userInfo) {
+      const token = userInfo.token;
+
+      locationBasedApiCall(token);
+    }
   }, [dispatch]);
 
   useEffect(() => {
