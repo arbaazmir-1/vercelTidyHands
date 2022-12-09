@@ -30,10 +30,10 @@ const LostPage = () => {
               <a href="https://codepen.io/eduardo_alejandro">
                 Eduardo Alejandro
               </a>
-              <p>
-                The page you are looking for might be under construction or
-                doesn't exist.
-              </p>
+            </p>
+            <p>
+              The page you are looking for might be under construction or
+              doesn't exist.
             </p>
           </div>
         </section>

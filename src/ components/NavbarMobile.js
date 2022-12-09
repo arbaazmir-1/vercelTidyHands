@@ -35,6 +35,10 @@ const NavbarMobile = (props) => {
   const [isLogged, setIsLogged] = useState(false);
 
   const userInfo = useSelector((state) => state.userLogin.userInfo);
+  if (!userInfo.avatar) {
+    userInfo.avatar =
+      "https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg";
+  }
 
   const logoutCall = () => {
     dispatch(logout());
@@ -99,7 +103,9 @@ const NavbarMobile = (props) => {
           </div>
           <div className="profileAvatar">
             <Menu>
-              <MenuButton as={Avatar}></MenuButton>
+              <MenuButton>
+                <Avatar src={userInfo.avatar} />
+              </MenuButton>
               <MenuList>
                 {isLogged ? (
                   <>
