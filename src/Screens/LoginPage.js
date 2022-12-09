@@ -87,6 +87,7 @@ const LoginPage = () => {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
+              disabled={loading}
             />
           </FormControl>
           <FormControl>
@@ -98,6 +99,7 @@ const LoginPage = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              disabled={loading}
             />
           </FormControl>
 

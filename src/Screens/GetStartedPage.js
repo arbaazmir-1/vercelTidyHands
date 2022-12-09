@@ -104,6 +104,7 @@ const GetStartedPage = () => {
                 placeholder="Enter your first name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                disabled={loading}
               />
             </FormControl>
             <FormControl>
@@ -113,6 +114,7 @@ const GetStartedPage = () => {
                 placeholder="Enter your last name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                disabled={loading}
               />
             </FormControl>
             <FormControl>
@@ -122,6 +124,7 @@ const GetStartedPage = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
               />
             </FormControl>
             <FormControl>
@@ -131,6 +134,7 @@ const GetStartedPage = () => {
                 placeholder="Enter your phone number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                disabled={loading}
               />
             </FormControl>
             <FormControl>
@@ -140,6 +144,7 @@ const GetStartedPage = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
               />
             </FormControl>
             <FormControl>
@@ -149,6 +154,7 @@ const GetStartedPage = () => {
                 placeholder="Confirm your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                disabled={loading}
               />
             </FormControl>
 

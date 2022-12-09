@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { logout } from "../actions/userAction";
 import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -88,7 +89,7 @@ const MainPage = () => {
 
       {loading ? (
         <div className="loading">
-          <i className="fa fa-spinner fa-spin"></i>
+          <Skeleton height="100%" />
         </div>
       ) : error ? (
         <div className="error">{error}</div>
@@ -112,7 +113,7 @@ const MainPage = () => {
       <div className="gigList">
         {loading ? (
           <div className="loading">
-            <i className="fa fa-spinner fa-spin"></i>
+            <Skeleton height="100%" />
           </div>
         ) : error ? (
           <div className="error">{error}</div>
