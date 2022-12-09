@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import preval from "preval.macro";
-import { Button } from "@chakra-ui/react";
 
 const CurrentFeature = () => {
   const [timeDifference, setTimeDifference] = useState(0);

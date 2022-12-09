@@ -8,7 +8,6 @@ import { Button } from "@chakra-ui/react";
 import {
   Alert,
   AlertIcon,
-  AlertTitle,
   AlertDescription,
   CloseButton,
 } from "@chakra-ui/react";
@@ -37,7 +36,7 @@ const SplashPage = () => {
       setText(arrayText[Math.floor(Math.random() * arrayText.length)]);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [arrayText]);
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => {
@@ -51,7 +50,7 @@ const SplashPage = () => {
     if (userInfo) {
       navigate("/main");
     }
-  }, [userInfo]);
+  }, [userInfo, navigate]);
 
   return (
     <>

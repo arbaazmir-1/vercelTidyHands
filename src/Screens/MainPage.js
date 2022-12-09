@@ -8,16 +8,9 @@ import { homepageAction } from "../actions/homepageAction";
 import CurrentFeature from "../ components/currentFeature";
 import HelperProfile from "../ components/HelperProfile";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { logout } from "../actions/userAction";
-import {
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Avatar,
-} from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -71,8 +64,9 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    if (userInfo && !data) {
+    if (userInfo && data.length === 0) {
       const token = userInfo.token;
+      console.log(data);
 
       locationBasedApiCall(token);
     }

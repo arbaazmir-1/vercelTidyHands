@@ -8,7 +8,7 @@ import "../scss/navbarMobile.scss";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/userAction";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import {
   Modal,
@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 const NavbarMobile = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   //check if show full search bar or not
-  const [showSearchBar, setShowSearchBar] = React.useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
   // function to show/hide search bar
   const searchBarToggle = () => {
     setShowSearchBar(!showSearchBar);
@@ -32,7 +32,7 @@ const NavbarMobile = (props) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const [isLogged, setIsLogged] = React.useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
@@ -49,7 +49,7 @@ const NavbarMobile = (props) => {
       setIsLogged(false);
       navigate("/");
     }
-  }, [userInfo]);
+  }, [userInfo, isLogged, navigate]);
 
   return (
     <>
