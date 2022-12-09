@@ -51,7 +51,7 @@ const GetStartedPage = () => {
       return;
     }
     //phone number validation
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\d{11}$/;
     if (!phoneRegex.test(phoneNumber)) {
       showToast("Please enter a valid phone number", "error");
       return;
