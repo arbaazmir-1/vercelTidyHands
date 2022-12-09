@@ -9,6 +9,15 @@ import CurrentFeature from "../ components/currentFeature";
 import HelperProfile from "../ components/HelperProfile";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { logout } from "../actions/userAction";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Avatar,
+} from "@chakra-ui/react";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -72,8 +81,11 @@ const MainPage = () => {
   useEffect(() => {
     if (!userInfo) {
       navigate("/");
+    } else if (error === "jwt expired") {
+      dispatch(logout());
+      navigate("/");
     }
-  }, [userInfo]);
+  }, [userInfo, error, dispatch, navigate]);
 
   return (
     <>
@@ -140,6 +152,19 @@ const MainPage = () => {
 
       <div className="currentFeature">
         <CurrentFeature />
+      </div>
+      <div className="fixedButton">
+        <Menu>
+          <MenuButton as={Button} className="buttonFixed">
+            <i className="fas fa-plus "></i>
+          </MenuButton>
+
+          <MenuList>
+            <MenuItem>Create a New Gig</MenuItem>
+            <MenuItem>Offer Services</MenuItem>
+            <MenuItem>Report Bug</MenuItem>
+          </MenuList>
+        </Menu>
       </div>
     </>
   );

@@ -12,6 +12,8 @@ import {
   AlertDescription,
   CloseButton,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SplashPage = () => {
   const arrayText = [
@@ -41,6 +43,15 @@ const SplashPage = () => {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+
+  const userInfo = useSelector((state) => state.userLogin.userInfo);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/main");
+    }
+  }, [userInfo]);
 
   return (
     <>
@@ -76,7 +87,7 @@ const SplashPage = () => {
           </div>
         </div>
 
-        <Link to="/getstarted" className="btn">
+        <Link to="/login" className="btn">
           <Button>Get Started</Button>
         </Link>
         <p className="privacyNotice">

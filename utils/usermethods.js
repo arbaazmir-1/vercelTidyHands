@@ -26,10 +26,18 @@ const registerUser = async (req, res) => {
         });
       }
     } else {
-      res.status(400).json({ error: "User already exists" });
+      const statusCode = res.statusCode === 200 ? 400 : res.statusCode;
+      res.status(statusCode);
+      res.json({
+        message: "User already exists, please login",
+      });
     }
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    const statusCode = res.statusCode === 200 ? 401 : res.statusCode;
+    res.status(statusCode);
+    res.json({
+      message: err.message,
+    });
   }
 };
 

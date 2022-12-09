@@ -54,7 +54,7 @@ const CurrentFeature = () => {
                 <i className="fa fa-check"></i>Authentication
               </li>
               <li>
-                <i className="fa fa-circle-o-notch"></i>Authorization
+                <i className="fa fa-check"></i>Authorization
               </li>
               <li>
                 <i className="fa fa-circle-o-notch"></i>CRUD

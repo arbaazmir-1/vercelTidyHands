@@ -44,6 +44,10 @@ export default async (req, res) => {
       res.json(data);
     } catch (err) {
       let error = err;
+      //check if jwt token is expired
+      if (err.name === "TokenExpiredError") {
+        error = "Token expired, please login again";
+      }
       res.status(500).json({ error });
     }
   } else if (requestType === "POST") {
