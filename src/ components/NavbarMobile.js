@@ -59,7 +59,12 @@ const NavbarMobile = (props) => {
 
   return (
     <>
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        blockScrollOnMount={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="xs"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Logout Confirmation</ModalHeader>
