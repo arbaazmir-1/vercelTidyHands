@@ -71,7 +71,7 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && !data) {
       const token = userInfo.token;
 
       locationBasedApiCall(token);

@@ -32,6 +32,7 @@ export const homepageAction =
         type: HOME_PAGE_SUCCESS,
         payload: data,
       });
+      localStorage.setItem("homepage", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: HOME_PAGE_FAIL,

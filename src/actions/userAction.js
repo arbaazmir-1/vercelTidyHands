@@ -46,6 +46,7 @@ export const login = (email, password) => async (dispatch) => {
 // user logout action
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
+  localStorage.removeItem("homepage");
 
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: HOME_PAGE_PAYLOAD_DELETE });

@@ -15,13 +15,17 @@ const reducer = combineReducers({
   // add reducers here
 });
 
+const homePageFromStorage = localStorage.getItem("homePage")
+  ? JSON.parse(localStorage.getItem("homePage"))
+  : [];
+
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
 const initialState = {
   // add initial state here
-
+  homePage: { data: homePageFromStorage },
   userLogin: { userInfo: userInfoFromStorage },
 };
 const middleware = [thunk];
