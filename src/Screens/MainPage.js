@@ -18,6 +18,7 @@ const MainPage = () => {
   const navigate = useNavigate();
   const homepage = useSelector((state) => state.homePage);
   const { loading, data } = homepage;
+  const array = [1, 2, 3];
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -88,8 +89,10 @@ const MainPage = () => {
       <ToastContainer />
 
       {loading ? (
-        <div className="loading">
-          <Skeleton height="100%" />
+        <div className="loadingProfile">
+          {array.map((item) => (
+            <Skeleton height="100%" className="skel" />
+          ))}
         </div>
       ) : error ? (
         <div className="error">{error}</div>
@@ -112,8 +115,10 @@ const MainPage = () => {
       <CatagoriesMenu />
       <div className="gigList">
         {loading ? (
-          <div className="loading">
-            <Skeleton height="100%" />
+          <div className="loadingGig">
+            {array.map((item) => (
+              <Skeleton height="100%" className="skel" />
+            ))}
           </div>
         ) : error ? (
           <div className="error">{error}</div>
