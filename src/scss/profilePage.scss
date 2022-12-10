@@ -1,0 +1,97 @@
+.profileInfoShow{
+    width: 90%;
+    margin: 0 auto;
+    background-color: #F7A4A4;
+    padding: 5%;
+    border-radius: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .userImg{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        img{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 5%;
+        }
+       
+    
+    }
+
+    .profileInfoShow__title{
+        font-size: 2rem;
+        font-weight: 600;
+        color: #fff;
+        text-align: center;
+        margin: 2%;
+    }
+    button{
+        width: 100%;
+        padding: 5%;
+        border-radius: 10px;
+        margin: 10px;
+    }
+}
+.profileInfoEdit{
+    width: 90%;
+    margin: 0 auto;
+    background-color: #F7A4A4;
+    padding: 5%;
+    border-radius: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1{
+        font-size: 2rem;
+        font-weight: 600;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+    
+       
+        form{
+             width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+            width: 100%;
+            margin-bottom: 5%;
+            input{
+                width: 100%;
+                padding: 5%;
+                border-radius: 10px;
+                background-color: #fff;
+                
+                font-size: 1.2rem;
+                font-weight: 600;
+                
+                
+                
+            }
+        }
+        
+            button{
+                width: 100%;
+                padding: 5%;
+                border-radius: 10px;
+                margin: 10px;
+            }
+        
+    
+}

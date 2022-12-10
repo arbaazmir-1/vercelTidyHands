@@ -123,7 +123,13 @@ const getUser = async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
       user.password = undefined;
+      if (!user.avatar) {
+        user.avatar =
+          "https://res.cloudinary.com/dv8jyfj0l/image/upload/v1620592802/avatars/default-avatar.png";
+      }
       res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
     }
   } catch (err) {
     res.status(500).json({ error: err.message });

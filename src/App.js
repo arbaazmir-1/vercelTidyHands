@@ -9,6 +9,7 @@ import LoginPage from "./Screens/LoginPage";
 import HelpersProfilePage from "./Screens/HelpersProfilePage";
 import GigPage from "./Screens/GigPage";
 import LostPage from "./Screens/LostPage";
+import ProfilePage from "./Screens/ProfilePage";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/helperprofile" element={<HelpersProfilePage />} />
             <Route path="/gig/:id" element={<GigPage />} />
-
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="*" element={<LostPage />} />
           </Routes>
         </ScrollToTop>

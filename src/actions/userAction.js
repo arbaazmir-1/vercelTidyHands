@@ -6,6 +6,10 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_RESET,
 } from "../constant/userConstant";
 import { HOME_PAGE_PAYLOAD_DELETE } from "../constant/homepageConstant";
 import axios from "axios";
@@ -50,6 +54,7 @@ export const logout = () => (dispatch) => {
 
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: HOME_PAGE_PAYLOAD_DELETE });
+  dispatch({ type: USER_DETAILS_RESET });
 };
 
 // user register action
@@ -93,6 +98,36 @@ export const register = (name, email, password, phone) => async (dispatch) => {
     });
     dispatch({
       type: USER_LOGIN_FAIL,
+      //check if there is a response from the server and if there is a message in the response
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUserDetails = (token) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DETAILS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const { data } = await axios.get(`/api/user?work=getuser`, config);
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+    localStorage.setItem("userDetails", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_DETAILS_FAIL,
       //check if there is a response from the server and if there is a message in the response
       payload:
         error.response && error.response.data.message

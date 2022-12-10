@@ -93,7 +93,9 @@ const NavbarMobile = (props) => {
       </Modal>
       <div className="navBar">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <Link to="/main">
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <div className="rightSide">
           <div className="searchbar">
