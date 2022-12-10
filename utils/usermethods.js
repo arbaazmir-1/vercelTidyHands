@@ -125,7 +125,7 @@ const getUser = async (req, res) => {
       user.password = undefined;
       if (!user.avatar) {
         user.avatar =
-          "https://res.cloudinary.com/dv8jyfj0l/image/upload/v1620592802/avatars/default-avatar.png";
+          "https://st3.depositphotos.com/9998432/13335/v/600/depositphotos_133352062-stock-illustration-default-placeholder-profile-icon.jpg";
       }
       res.status(200).json(user);
     } else {
