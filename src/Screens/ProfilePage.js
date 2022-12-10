@@ -45,7 +45,7 @@ const ProfilePage = () => {
       setPhone(user.phone);
       setAddress(user.address);
     }
-  }, [userInfo, navigate, dispatch]);
+  }, [userInfo, navigate, dispatch, user]);
 
   return (
     <>
