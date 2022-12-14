@@ -11,25 +11,6 @@ const fetchHomeGigs = async (req, res) => {
   try {
     await connectDB();
     let distance = 20;
-    const user = await User.findById(req.user._id);
-    // if (user) {
-    //   if (user.searchLocation.length === 0) {
-    //     user.searchLocation.push([long, lat]);
-    //     await user.save();
-    //   } else {
-    //     for (let i = 0; i < user.searchLocation.length; i++) {
-    //       if (
-    //         user.searchLocation[i][0] === long &&
-    //         user.searchLocation[i][1] === lat
-    //       ) {
-    //         console.log("location already exists");
-    //       } else {
-    //         user.searchLocation.push([long, lat]);
-    //         await user.save();
-    //       }
-    //     }
-    //   }
-    // }
 
     //find gigs within 10km radius
     const gigs = await Gig.find({
