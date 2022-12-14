@@ -25,6 +25,9 @@ const NavbarMobile = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   //check if show full search bar or not
   const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const [searchItem, setSearchItem] = useState("");
+
   // function to show/hide search bar
   const searchBarToggle = () => {
     setShowSearchBar(!showSearchBar);
@@ -50,7 +53,6 @@ const NavbarMobile = (props) => {
   useEffect(() => {
     if (userInfo) {
       setIsLogged(true);
-      console.log(isLogged);
     } else {
       setIsLogged(false);
       navigate("/");
@@ -70,7 +72,7 @@ const NavbarMobile = (props) => {
           <ModalHeader>Logout Confirmation</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text fontWeight="bold" mb="1rem">
+            <Text fontWeight="light" mb="1rem">
               Are you sure you want to logout?
             </Text>
           </ModalBody>
@@ -105,6 +107,13 @@ const NavbarMobile = (props) => {
                 placeholder="Search for a service"
                 className="searchInput"
                 onBlur={searchBarToggle}
+                value={searchItem}
+                onChange={(e) => setSearchItem(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter" && searchItem !== "") {
+                    navigate("/search?query=" + searchItem);
+                  }
+                }}
               />
             ) : (
               <i className="fas fa-search" onClick={searchBarToggle}></i>

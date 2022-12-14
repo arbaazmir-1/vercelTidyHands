@@ -1,58 +1,15 @@
-import connectDB from "../../utils/db";
-import Gig from "../../models/gigModel";
-import User from "../../models/userModel";
-import ActiveHelper from "../../models/activeSellerModel";
-const { protect } = require("../../utils/authMiddleware");
+const connectDB = require("../../utils/db");
+
+const { fetchHomeGigs, searchGigs } = require("../../utils/fetchMethods");
 
 export default async (req, res) => {
-  await protect(req, res);
   let requestType = req.method;
-  if (requestType === "GET") {
-    try {
-      let { long, lat } = req.query;
-      console.log(long, lat);
-      await connectDB();
-      let distance = 20;
+  let { search } = req.query;
 
-      //find gigs within 10km radius
-      const gigs = await Gig.find({
-        coords: {
-          $near: {
-            $geometry: {
-              type: "Point",
-
-              coordinates: [long, lat],
-            },
-            $maxDistance: distance * 1000,
-          },
-        },
-      }).populate("buyer", "name phone avatar");
-      if (!gigs) {
-        return res.status(404).json({ message: "No gigs found" });
-      }
-
-      const activeHelpers = await ActiveHelper.find({}).populate(
-        "seller",
-        "name phone avatar"
-      );
-      let data = {
-        gigs,
-        gigsRadius: distance,
-        activeHelpers,
-      };
-
-      res.json(data);
-    } catch (err) {
-      let error = err;
-      //check if jwt token is expired
-      if (err.name === "TokenExpiredError") {
-        error = "Token expired, please login again";
-      }
-      res.status(500).json({ error });
-    }
-  } else if (requestType === "POST") {
-    dbConnect();
-    const { gig, description, price, image, deliveryTime } = req.body;
-    res.json({ gig, description, price, image, deliveryTime });
+  let { work } = req.query;
+  if (requestType === "GET" && work === "homegig") {
+    await fetchHomeGigs(req, res);
+  } else if (requestType === "GET" && search) {
+    await searchGigs(req, res);
   }
 };

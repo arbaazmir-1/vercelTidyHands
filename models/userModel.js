@@ -33,6 +33,10 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  searchLocation: {
+    type: Array,
+    default: [],
+  },
 });
 
 //match user entered password to hashed password in database

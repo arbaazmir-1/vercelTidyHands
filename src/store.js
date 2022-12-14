@@ -7,12 +7,14 @@ import {
   userRegisterReducer,
   userDetailsReducer,
 } from "./reducers/userReducers";
+import { searchReducer } from "./reducers/searchReducer";
 
 const reducer = combineReducers({
   homePage: homePageReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  search: searchReducer,
 
   // add reducers here
 });

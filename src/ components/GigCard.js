@@ -9,6 +9,8 @@ const GigCard = (props) => {
   let lat1 = gig.coords[1];
   let long1 = gig.coords[0];
   const [distance, setDistance] = useState(0);
+  let path = window.location.pathname;
+
   //measure distance between user and gig
   useEffect(() => {
     if (navigator.geolocation) {
@@ -45,7 +47,7 @@ const GigCard = (props) => {
           </p>
           <h4>${gig.price}/Hour</h4>
         </div>
-        <Link to={"/gig/" + gig._id}>
+        <Link to={{ pathname: "/gig/" + gig._id }}>
           <button>View</button>
         </Link>
       </div>

@@ -24,7 +24,7 @@ export const homepageAction =
 
       // );
       const { data } = await axios.get(
-        "/api/gigs/fetch?long=" + long + "&lat=" + lat + "",
+        "/api/gigs/fetch?work=homegig&long=" + long + "&lat=" + lat + "",
         config
       );
 

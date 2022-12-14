@@ -68,11 +68,10 @@ const MainPage = () => {
   useEffect(() => {
     if (userInfo && data.length === 0) {
       const token = userInfo.token;
-      console.log(data);
 
       locationBasedApiCall(token);
     }
-  }, [dispatch]);
+  }, [userInfo, dispatch, data.length]);
 
   useEffect(() => {
     if (!userInfo) {
@@ -91,7 +90,7 @@ const MainPage = () => {
       {loading ? (
         <div className="loadingProfile">
           {array.map((item) => (
-            <Skeleton height="100%" className="skel" />
+            <Skeleton height="100%" className="skel" key={item} />
           ))}
         </div>
       ) : error ? (
@@ -117,7 +116,7 @@ const MainPage = () => {
         {loading ? (
           <div className="loadingGig">
             {array.map((item) => (
-              <Skeleton height="100%" className="skel" />
+              <Skeleton height="100%" className="skel" key={item} />
             ))}
           </div>
         ) : error ? (

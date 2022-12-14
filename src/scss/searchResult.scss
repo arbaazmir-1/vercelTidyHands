@@ -1,0 +1,32 @@
+.pageNumbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .pageNumber{
+        margin: 0 5px;
+        a{
+            display: block;
+            padding: 10px 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            color: #333;
+            text-decoration: none;
+            &:hover{
+                background-color: #f1f1f1;
+            }
+        }
+        &.active{
+            a{
+                background-color: #333;
+                color: #fff;
+            }
+        }
+    }
+}
