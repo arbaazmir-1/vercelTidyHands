@@ -1,6 +1,10 @@
 const connectDB = require("../../utils/db");
 
-const { fetchHomeGigs, searchGigs } = require("../../utils/fetchMethods");
+const {
+  fetchHomeGigs,
+  searchGigs,
+  report,
+} = require("../../utils/fetchMethods");
 
 export default async (req, res) => {
   let requestType = req.method;
@@ -11,5 +15,7 @@ export default async (req, res) => {
     await fetchHomeGigs(req, res);
   } else if (requestType === "GET" && search) {
     await searchGigs(req, res);
+  } else if (requestType === "POST" && work === "reportbug") {
+    await report(req, res);
   }
 };

@@ -2,6 +2,9 @@ import {
   HOME_PAGE_REQUEST,
   HOME_PAGE_SUCCESS,
   HOME_PAGE_FAIL,
+  REPORT_BUG_REQUEST,
+  REPORT_BUG_SUCCESS,
+  REPORT_BUG_FAIL,
 } from "../constant/homepageConstant";
 import axios from "axios";
 
@@ -42,4 +45,29 @@ export const homepageAction =
             : error.message,
       });
     }
+  };
+
+export const reportBugAction =
+  (title, description, token) => async (dispatch) => {
+    try {
+      dispatch({ type: REPORT_BUG_REQUEST });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/gigs/fetch?work=reportbug",
+        { title, description },
+        config
+      );
+
+      dispatch({
+        type: REPORT_BUG_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {}
   };

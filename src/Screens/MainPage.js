@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import { logout } from "../actions/userAction";
 import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -159,9 +160,15 @@ const MainPage = () => {
           </MenuButton>
 
           <MenuList>
-            <MenuItem>Create a New Gig</MenuItem>
-            <MenuItem>Offer Services</MenuItem>
-            <MenuItem>Report Bug</MenuItem>
+            <Link to="/newgig">
+              <MenuItem>Create a New Gig</MenuItem>
+            </Link>
+            <Link to="/offerservice">
+              <MenuItem>Offer Services</MenuItem>
+            </Link>
+            <Link to="/reportbug">
+              <MenuItem>Report Bug</MenuItem>
+            </Link>
           </MenuList>
         </Menu>
       </div>

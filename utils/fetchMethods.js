@@ -1,6 +1,7 @@
 import connectDB from "./db";
 import Gig from "../models/gigModel";
 import User from "../models/userModel";
+import Report from "../models/reportModel";
 import ActiveHelper from "../models/activeSellerModel";
 const { protect } = require("./authMiddleware");
 
@@ -108,7 +109,29 @@ const searchGigs = async (req, res) => {
   }
 };
 
+const report = async (req, res) => {
+  await protect(req, res);
+  const { title, description } = req.body;
+  try {
+    await connectDB();
+    const bug = await Report.create({
+      title,
+      description,
+      user: req.user._id,
+    });
+    res.status(200).json("success");
+  } catch (err) {
+    let error = err;
+    //check if jwt token is expired
+    if (err.name === "TokenExpiredError") {
+      error = "Token expired, please login again";
+    }
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   fetchHomeGigs,
   searchGigs,
+  report,
 };

@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { homePageReducer } from "./reducers/homepageReducer";
+import { homePageReducer, reportBugReducer } from "./reducers/homepageReducer";
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -15,6 +15,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   search: searchReducer,
+  report: reportBugReducer,
 
   // add reducers here
 });

@@ -11,6 +11,7 @@ import GigPage from "./Screens/GigPage";
 import LostPage from "./Screens/LostPage";
 import ProfilePage from "./Screens/ProfilePage";
 import SearchResult from "./Screens/SearchResult";
+import ReportBug from "./Screens/ReportBug";
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
             <Route path="/helperprofile" element={<HelpersProfilePage />} />
             <Route path="/gig/:id" element={<GigPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/reportbug" element={<ReportBug />} />
             <Route path="/search" element={<SearchResult />} />
+
             <Route path="*" element={<LostPage />} />
           </Routes>
         </ScrollToTop>
