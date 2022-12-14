@@ -39,11 +39,12 @@ const ProfilePage = () => {
     } else {
       if (!user.name) {
         dispatch(getUserDetails(userInfo.token));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setPhone(user.phone);
+        setAddress(user.address);
       }
-      setName(user.name);
-      setEmail(user.email);
-      setPhone(user.phone);
-      setAddress(user.address);
     }
   }, [userInfo, navigate, dispatch, user]);
 
