@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-export const generateToken = (id) => {
+const generateToken = (id) => {
   if (!id) {
     throw new Error("No id provided");
   }
@@ -8,3 +8,5 @@ export const generateToken = (id) => {
     expiresIn: "7d",
   });
 };
+
+module.exports = generateToken;
