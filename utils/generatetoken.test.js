@@ -1,5 +1,6 @@
 import { it, expect } from "vitest";
-import { generateToken } from "./generateToken.js";
+import generateToken from "./generateToken.js";
+
 import jwt from "jsonwebtoken";
 
 it("generates a token", () => {
@@ -16,5 +17,5 @@ it("generates a token with the correct id", () => {
 });
 
 it("throws an error if no id is provided", () => {
-  expect(() => generateToken()).toThrow();
+  expect(() => generateToken()).toThrow(/No id provided/);
 });
