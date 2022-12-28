@@ -12,7 +12,8 @@ const fetchHomeGigs = async (req, res) => {
     await connectDB();
     let distance = 20;
 
-    //find gigs within 10km radius
+    //find gigs within 10km radius, last 10 gigs
+
     const gigs = await Gig.find({
       coords: {
         $near: {
@@ -24,15 +25,33 @@ const fetchHomeGigs = async (req, res) => {
           $maxDistance: distance * 1000,
         },
       },
-    }).populate("buyer", "name phone avatar");
+    })
+      .sort({ _id: -1 })
+      .limit(15)
+      .populate("buyer", "name phone avatar");
     if (!gigs) {
       return res.status(404).json({ message: "No gigs found" });
     }
 
-    const activeHelpers = await ActiveHelper.find({}).populate(
-      "seller",
-      "name phone avatar"
-    );
+    const activeHelpers = await ActiveHelper.find({
+      coords: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: [long, lat],
+          },
+          $maxDistance: distance * 1000,
+        },
+      },
+    })
+      .sort({ _id: -1 })
+      .limit(15)
+      .populate("seller", "name phone avatar");
+    console.log(activeHelpers);
+    if (!activeHelpers) {
+      activeHelpers = [];
+    }
+
     let data = {
       gigs,
       gigsRadius: distance,

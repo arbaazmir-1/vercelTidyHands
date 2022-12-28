@@ -16,11 +16,11 @@ const activeHelperSchema = new Schema({
   ],
   location: {
     type: String,
-    required: true,
   },
-  latLong: {
+  coords: {
     type: [Number],
     required: true,
+    index: "2dsphere",
   },
   timePosted: {
     type: Date,

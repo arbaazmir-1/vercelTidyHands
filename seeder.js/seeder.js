@@ -129,20 +129,24 @@ connectDB();
 
 const importData = async () => {
   try {
-    await User.deleteMany();
-    await Gig.deleteMany();
+    // await User.deleteMany();
+    // await Gig.deleteMany();
     await ActiveHelper.deleteMany();
 
-    const user = await User.insertMany(users);
+    // const user = await User.insertMany(users);
 
-    const sampleGigs = gigs.map((gig) => {
-      return { ...gig, buyer: user[0]._id };
-    });
+    const users = await User.find().limit(2);
+
+    // const sampleGigs = gigs.map((gig) => {
+    //   return { ...gig, buyer: user[0]._id };
+    // });
     const sampleActHelp = actHelp.map((act) => {
-      return { ...act, seller: user[0]._id };
+      for (let i = 0; i < users.length; i++) {
+        return { ...act, seller: users[i]._id };
+      }
     });
     await ActiveHelper.insertMany(sampleActHelp);
-    await Gig.insertMany(sampleGigs);
+    // await Gig.insertMany(sampleGigs);
 
     console.log("Data Imported");
     process.exit();

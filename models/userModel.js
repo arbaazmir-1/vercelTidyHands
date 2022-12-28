@@ -37,6 +37,14 @@ const userSchema = new Schema({
     type: Array,
     default: [],
   },
+  ratingAsBuyer: {
+    type: Number,
+    default: 0,
+  },
+  ratingAsSeller: {
+    type: Number,
+    default: 0,
+  },
 });
 
 //match user entered password to hashed password in database

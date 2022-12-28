@@ -20,8 +20,7 @@ const gigSchema = new Schema({
     type: String,
   },
   needWithin: {
-    type: Number,
-    required: true,
+    type: Date,
   },
   category: {
     type: String,

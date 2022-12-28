@@ -19,6 +19,14 @@ const CreateGig = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState([]);
+
+  const [timeLimit, setTimeLimit] = useState("");
+
   const locationBasedApiCall = async () => {
     let long, lat;
     if (navigator.geolocation) {
@@ -29,7 +37,7 @@ const CreateGig = () => {
         if (lat > 90 || lat < -90 || long > 180 || long < -180) {
           return;
         }
-        console.log(lat, long);
+        setLocation([long, lat]);
         setLoading(true);
         axios
           .get(
@@ -48,8 +56,6 @@ const CreateGig = () => {
     }
   };
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <NavbarMobile />
@@ -63,37 +69,55 @@ const CreateGig = () => {
         <GridItem colSpan={1}>
           <FormControl id="gig-title" isRequired>
             <FormLabel>Title</FormLabel>
-            <Input placeholder="Title Of Your Gig" />
+            <Input
+              placeholder="Title Of Your Gig"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={1}>
           <FormControl id="gig-description" isRequired>
             <FormLabel>Description</FormLabel>
-            <Input placeholder="Description Of Your Gig" />
+            <Input
+              placeholder="Description Of Your Gig"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={1}>
           <FormControl id="gig-price" isRequired>
             <FormLabel>Price</FormLabel>
-            <Input placeholder="Price Of Your Gig" />
+            <Input
+              placeholder="Price Of Your Gig"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={1}>
           <FormControl id="gig-category" isRequired>
             <FormLabel>Category</FormLabel>
-            <Select placeholder="Select option">
-              <option value="option1">Cleaning</option>
-              <option value="option2">Delivery</option>
-              <option value="option3">Gardening</option>
-              <option value="option4">Handyman</option>
-              <option value="option5">Moving</option>
-              <option value="option6">Painting</option>
-              <option value="option7">Photography</option>
-              <option value="option8">Tutoring</option>
-              <option value="option9">Other</option>
+            <Select
+              placeholder="Select option"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="cleaning">Cleaning</option>
+              <option value="delivery">Delivery</option>
+              <option value="gardening">Gardening</option>
+              <option value="handyman">Handyman</option>
+              <option value="moving">Moving</option>
+              <option value="pet">Pet</option>
+              <option value="photography">Photography</option>
+              <option value="tech">Tech</option>
+              <option value="tutoring">Tutoring</option>
+              <option value="writing">Writing</option>
+              <option value="other">Other</option>
             </Select>
           </FormControl>
         </GridItem>
@@ -114,16 +138,16 @@ const CreateGig = () => {
           </FormControl>
         </GridItem>
         <GridItem colSpan={1}>{address && <p>{address}</p>}</GridItem>
-        <GridItem colSpan={1}>
-          <FormControl id="gig-image">
-            <FormLabel>Image</FormLabel>
-            <Input type="file" />
-          </FormControl>
-        </GridItem>
+
         <GridItem colSpan={1}>
           <FormControl id="gig-timeLimit">
             <FormLabel>Time Limit</FormLabel>
-            <Input type="date" />
+            <Input
+              type="date"
+              placeholder="Time Limit"
+              value={timeLimit}
+              onChange={(e) => setTimeLimit(e.target.value)}
+            />
           </FormControl>
         </GridItem>
         <GridItem colSpan={1}>

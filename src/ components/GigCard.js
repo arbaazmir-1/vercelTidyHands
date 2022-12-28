@@ -38,7 +38,24 @@ const GigCard = (props) => {
     <>
       <div className="gigCard">
         <div className="gigIcon">
-          <i className="fas fa-broom"></i>
+          {gig.category === "cleaning" && <i className="fas fa-broom"></i>}
+          {gig.category === "delivery" && <i className="fas fa-truck"></i>}
+          {gig.category === "gardening" && <i className="fas fa-seedling"></i>}
+          {gig.category === "moving" && <i className="fas fa-truck-moving"></i>}
+          {gig.category === "tutoring" && (
+            <i className="fas fa-chalkboard-teacher"></i>
+          )}
+          {gig.category === "cooking" && <i className="fas fa-utensils"></i>}
+          {gig.category === "petcare" && <i className="fas fa-paw"></i>}
+          {gig.category === "tech" && <i className="fas fa-laptop"></i>}
+          {gig.category === "handyman" && <i className="fas fa-tools"></i>}
+          {gig.category === "babysitting" && <i className="fas fa-baby"></i>}
+          {gig.category === "photography" && <i className="fas fa-camera"></i>}
+          {gig.category === "music" && <i className="fas fa-music"></i>}
+          {gig.category === "writing" && <i className="fas fa-pen"></i>}
+          {gig.category === "design" && <i className="fas fa-paint-brush"></i>}
+          {gig.category === "driving" && <i className="fas fa-car"></i>}
+          {gig.category === "other" && <i className="fas fa-question"></i>}
         </div>
         <div className="gigInfo">
           <h3>{gig.title}</h3>
