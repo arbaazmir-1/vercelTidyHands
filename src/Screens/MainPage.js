@@ -160,7 +160,7 @@ const MainPage = () => {
           </MenuButton>
 
           <MenuList>
-            <Link to="/newgig">
+            <Link to="/creategig">
               <MenuItem>Create a New Gig</MenuItem>
             </Link>
             <Link to="/offerservice">

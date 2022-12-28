@@ -12,6 +12,7 @@ import LostPage from "./Screens/LostPage";
 import ProfilePage from "./Screens/ProfilePage";
 import SearchResult from "./Screens/SearchResult";
 import ReportBug from "./Screens/ReportBug";
+import CreateGig from "./Screens/CreateGig";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/reportbug" element={<ReportBug />} />
             <Route path="/search" element={<SearchResult />} />
+            <Route path="/creategig" element={<CreateGig />} />
 
             <Route path="*" element={<LostPage />} />
           </Routes>

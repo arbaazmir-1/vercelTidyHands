@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import SplashScreenSvg from "../ components/SplashScreenSvg";
 import logo from "../Images/logo.svg";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const SplashPage = () => {
-  const arrayText = [
+  const arrayText = useMemo(() => [
     {
       title: "Get Helpers to do your work",
       para: "From cleaning your house to watering your plants. We have someone for your tasks.",
@@ -28,7 +28,7 @@ const SplashPage = () => {
       title: "Get your work done",
       para: "Don't worry about your work. We have someone for your tasks. Just sit back and relax.",
     },
-  ];
+  ]);
   const [text, setText] = useState(arrayText[0]);
   //change text every 3 seconds
   useEffect(() => {

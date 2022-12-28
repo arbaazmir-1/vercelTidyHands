@@ -6,6 +6,7 @@
     "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mapbox/search-js-react": "^1.0.0-beta.14",
     "axios": "^1.2.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
@@ -30,7 +31,8 @@
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build",
     "eject": "react-scripts eject",
-    "test": "vitest --run --reporter verbose"
+    "test": "vitest --run --reporter verbose",
+    "coverage": "vitest run --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@vitest/coverage-c8": "^0.26.0",
     "vitest": "^0.25.8"
   }
 }
