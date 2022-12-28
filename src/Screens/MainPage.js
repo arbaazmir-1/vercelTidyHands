@@ -123,7 +123,7 @@ const MainPage = () => {
         <div className="error">{error}</div>
       ) : (
         <>
-          {typeof activeHelpers !== "undefined" && activeHelpers.length > 0 ? (
+          {typeof activeHelpers !== "undefined" && activeHelpers.length > 0 && (
             //check if activeHelpers is not empty
             <>
               <h4 style={{ margin: "10px" }} className="gigListCard">
@@ -135,13 +135,6 @@ const MainPage = () => {
                 ))}
               </div>
             </>
-          ) : (
-            <div className="noGigs">
-              <h4>No Helpers Found</h4>
-              <p>
-                Try changing your location or search for a different category
-              </p>
-            </div>
           )}
         </>
       )}
