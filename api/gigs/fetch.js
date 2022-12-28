@@ -1,5 +1,3 @@
-const connectDB = require("../../utils/db");
-
 const {
   fetchHomeGigs,
   searchGigs,

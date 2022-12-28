@@ -13,13 +13,15 @@ import { logout } from "../actions/userAction";
 import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const homepage = useSelector((state) => state.homePage);
   const { loading, data } = homepage;
-  const array = [1, 2, 3];
+  const array = [1, 2];
+  const array2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -52,18 +54,41 @@ const MainPage = () => {
   //get user long and lat and then dispatch action
   const locationBasedApiCall = (token) => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const long = position.coords.longitude;
-        const lat = position.coords.latitude;
-        //check if lang and lat are correct
-        // const long = 101.60983276367188;
-        // const lat = 4.823666572570801;
-        if (lat > 90 || lat < -90 || long > 180 || long < -180) {
-          return;
-        }
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const long = position.coords.longitude;
+          const lat = position.coords.latitude;
+          //check if lang and lat are correct
+          // const long = 101.60983276367188;
+          // const lat = 4.823666572570801;
+          if (lat > 90 || lat < -90 || long > 180 || long < -180) {
+            return;
+          }
 
-        dispatch(homepageAction({ long, lat, token }));
-      });
+          dispatch(homepageAction({ long, lat, token }));
+        },
+
+        (error) => {
+          //if user denies location access
+          if (error.code === error.PERMISSION_DENIED) {
+            //show toast message
+            toast.error("Please allow location access to continue", {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            // set delay to 3 seconds
+            setTimeout(() => {
+              navigate("/");
+            }, 3000);
+          }
+        },
+        { enableHighAccuracy: true }
+      );
     }
   };
   useEffect(() => {
@@ -91,7 +116,7 @@ const MainPage = () => {
       {loading ? (
         <div className="loadingProfile">
           {array.map((item) => (
-            <Skeleton height="100%" className="skel" key={item} />
+            <Skeleton boxSize="200px" className="skel" key={item} />
           ))}
         </div>
       ) : error ? (
@@ -124,8 +149,8 @@ const MainPage = () => {
       <div className="gigList">
         {loading ? (
           <div className="loadingGig">
-            {array.map((item) => (
-              <Skeleton height="100%" className="skel" key={item} />
+            {array2.map((item) => (
+              <Skeleton height="md" className="skel" key={item} />
             ))}
           </div>
         ) : error ? (

@@ -8,7 +8,7 @@ const GigCard = (props) => {
   const { gig } = props;
   let lat1 = gig.coords[1];
   let long1 = gig.coords[0];
-  const [distance, setDistance] = useState(0);
+  const [distance, setDistance] = useState("");
   let path = window.location.pathname;
 
   //measure distance between user and gig
@@ -29,7 +29,16 @@ const GigCard = (props) => {
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         const d = R * c; // in metres
-        setDistance(Math.round(d / 1000));
+        //convert to km
+        const dInKm = d / 1000;
+        //check if km is less than 1
+        if (dInKm < 1) {
+          //convert to m
+          const dInM = dInKm * 1000;
+          setDistance(`${Math.round(dInM)} Meters Away `);
+        } else {
+          setDistance(`${Math.round(dInKm)} Kilometers Away `);
+        }
       });
     }
   }, [lat1, long1]);
@@ -60,7 +69,7 @@ const GigCard = (props) => {
         <div className="gigInfo">
           <h3>{gig.title}</h3>
           <p>
-            {distance} KM Away | {gig.noOfApplicants} Applicants{" "}
+            {distance} | {gig.noOfApplicants} Applicants{" "}
           </p>
           <h4>${gig.price}/Hour</h4>
         </div>
