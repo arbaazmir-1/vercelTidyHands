@@ -47,7 +47,7 @@ const fetchHomeGigs = async (req, res) => {
       .sort({ _id: -1 })
       .limit(15)
       .populate("seller", "name phone avatar");
-    console.log(activeHelpers);
+
     if (!activeHelpers) {
       activeHelpers = [];
     }

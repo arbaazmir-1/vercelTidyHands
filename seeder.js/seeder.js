@@ -135,15 +135,16 @@ const importData = async () => {
 
     // const user = await User.insertMany(users);
 
-    const users = await User.find().limit(2);
+    const users = await User.find().sort({ _id: -1 }).limit(2);
+    console.log(users.length);
 
     // const sampleGigs = gigs.map((gig) => {
     //   return { ...gig, buyer: user[0]._id };
     // });
+    //loop through actHelp and add seller id from users
+
     const sampleActHelp = actHelp.map((act) => {
-      for (let i = 0; i < users.length; i++) {
-        return { ...act, seller: users[i]._id };
-      }
+      return { ...act, seller: users[0]._id };
     });
     await ActiveHelper.insertMany(sampleActHelp);
     // await Gig.insertMany(sampleGigs);

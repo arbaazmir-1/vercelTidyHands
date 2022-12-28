@@ -9,7 +9,14 @@ const HelperProfile = (props) => {
     <>
       <div className="helperProfileCard">
         <div className="helperProfileImage">
-          <img src={helper.seller.avatar} alt="" />
+          {!helper.seller.avatar ? (
+            <img
+              src="https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
+              alt=""
+            />
+          ) : (
+            <img src={helper.seller.avatar} alt="" />
+          )}
 
           <div className="helperProfileRating">
             <i className="fas fa-star"></i>
