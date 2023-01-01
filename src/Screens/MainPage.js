@@ -96,17 +96,13 @@ const MainPage = () => {
       const token = userInfo.token;
 
       locationBasedApiCall(token);
-    }
-  }, [userInfo, dispatch, data.length]);
-
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/");
     } else if (error === "jwt expired") {
       dispatch(logout());
       navigate("/");
+    } else if (!userInfo) {
+      navigate("/");
     }
-  }, [userInfo, error, dispatch, navigate]);
+  }, [userInfo, data.length, error]);
 
   return (
     <>
@@ -115,6 +111,7 @@ const MainPage = () => {
 
       {loading ? (
         <div className="loadingProfile">
+          <SkeletonText mt="4" noOfLines={1} spacing="4" skeletonHeight="2" />
           {array.map((item) => (
             <Skeleton boxSize="200px" className="skel" key={item} />
           ))}
