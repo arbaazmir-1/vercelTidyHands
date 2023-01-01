@@ -11,6 +11,39 @@ const GigCard = (props) => {
   const [distance, setDistance] = useState("");
   let path = window.location.pathname;
 
+  const { timePosted } = gig;
+  const timeNow = Date.now();
+
+  let convertedTime = new Date(timePosted);
+
+  const timeDecider = () => {
+    const timeDiff = timeNow - convertedTime;
+    const timeDiffInSec = timeDiff / 1000;
+    const timeDiffInMin = timeDiffInSec / 60;
+    const timeDiffInHrs = timeDiffInMin / 60;
+    const timeDiffInDays = timeDiffInHrs / 24;
+    const timeDiffInWeeks = timeDiffInDays / 7;
+    const timeDiffInMonths = timeDiffInWeeks / 4;
+    const timeDiffInYears = timeDiffInMonths / 12;
+    if (timeDiffInSec < 1) {
+      return "Just Now";
+    } else if (timeDiffInSec < 60) {
+      return `${Math.round(timeDiffInSec)} Seconds Ago`;
+    } else if (timeDiffInMin < 60) {
+      return `${Math.round(timeDiffInMin)} Minutes Ago`;
+    } else if (timeDiffInHrs < 24) {
+      return `${Math.round(timeDiffInHrs)} Hours Ago`;
+    } else if (timeDiffInDays < 7) {
+      return `${Math.round(timeDiffInDays)} Days Ago`;
+    } else if (timeDiffInWeeks < 4) {
+      return `${Math.round(timeDiffInWeeks)} Weeks Ago`;
+    } else if (timeDiffInMonths < 12) {
+      return `${Math.round(timeDiffInMonths)} Months Ago`;
+    } else {
+      return `${Math.round(timeDiffInYears)} Years Ago`;
+    }
+  };
+
   //measure distance between user and gig
   useEffect(() => {
     if (navigator.geolocation) {
@@ -72,6 +105,7 @@ const GigCard = (props) => {
             {distance} | {gig.noOfApplicants} Applicants{" "}
           </p>
           <h4>${gig.price}/Hour</h4>
+          <p>{timeDecider()}</p>
         </div>
         <Link to={{ pathname: "/gig/" + gig._id }}>
           <button>View</button>

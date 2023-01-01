@@ -3,17 +3,25 @@ import Gig from "../models/gigModel";
 import User from "../models/userModel";
 
 const createNewGig = async (req, res) => {
-  const { title, description, price, coords, category } = req.body;
+  const { title, description, price, location, category, timeLimit } = req.body;
+
   try {
     await connectDB();
     const gig = await Gig.create({
       title,
       description,
       price,
-      coords,
+      coords: location,
       buyer: req.user._id,
       category,
+      timePosted: Date.now(),
+      needWithin: timeLimit,
     });
+    const user = await User.findById(req.user._id);
+
+    user.gigsPosted.push(gig._id);
+    await user.save();
+
     if (!gig) {
       return res.status(400).json({ message: "Gig not created" });
     }

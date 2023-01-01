@@ -45,6 +45,12 @@ const userSchema = new Schema({
     type: Number,
     default: 0,
   },
+  gigsPosted: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Gig",
+    },
+  ],
 });
 
 //match user entered password to hashed password in database

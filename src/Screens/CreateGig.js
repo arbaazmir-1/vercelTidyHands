@@ -9,11 +9,16 @@ import {
   Input,
   Select,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 import axios from "axios";
-
 import { useState } from "react";
 import { useEffect } from "react";
+import "../scss/CreateGig.scss";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { set } from "mongoose";
+
 const CreateGig = () => {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,6 +29,21 @@ const CreateGig = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState([]);
+  const [placHolder, setPlaceHolder] = useState("I need help with cleaning");
+  const [fading, setFading] = useState(false);
+  const [loadingGig, setLoadingGig] = useState(false);
+  const [errorGig, setErrorGig] = useState(false);
+  const [successGig, setSuccessGig] = useState(false);
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const { token } = userInfo;
+
+  const placeHolderArray = [
+    "I need help with cleaning",
+    "I need help with delivery",
+    "I need help with gardening",
+  ];
 
   const [timeLimit, setTimeLimit] = useState("");
 
@@ -32,6 +52,7 @@ const CreateGig = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         long = position.coords.longitude;
+
         lat = position.coords.latitude;
 
         if (lat > 90 || lat < -90 || long > 180 || long < -180) {
@@ -55,7 +76,90 @@ const CreateGig = () => {
       });
     }
   };
+  const submitGig = async () => {
+    if (
+      !title ||
+      !description ||
+      !price ||
+      !category ||
+      location.length === 0 ||
+      !timeLimit
+    ) {
+      toast.error("Please fill in all the fields", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      setLoadingGig(true);
+      try {
+        let data = await axios.post(
+          "/api/gigs/crud",
+          {
+            title,
+            description,
+            price,
+            location,
+            category,
 
+            timeLimit,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setLoadingGig(false);
+        if (data) {
+          setSuccessGig(true);
+          toast.success("Gig created successfully", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      } catch (err) {
+        setLoadingGig(false);
+        setErrorGig(err);
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    setFading(true);
+    setTimeout(() => {
+      // change the placeholder chronologically every 5 seconds to the next one
+      setPlaceHolder(
+        placeHolderArray[
+          placeHolderArray.indexOf(placHolder) + 1 === placeHolderArray.length
+            ? 0
+            : placeHolderArray.indexOf(placHolder) + 1
+        ]
+      );
+
+      setFading(false);
+    }, 5000);
+  });
   return (
     <>
       <NavbarMobile />
@@ -70,9 +174,10 @@ const CreateGig = () => {
           <FormControl id="gig-title" isRequired>
             <FormLabel>Title</FormLabel>
             <Input
-              placeholder="Title Of Your Gig"
+              placeholder={placHolder}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              className={fading ? "fading" : "notFading"}
             />
           </FormControl>
         </GridItem>
@@ -151,7 +256,22 @@ const CreateGig = () => {
           </FormControl>
         </GridItem>
         <GridItem colSpan={1}>
-          <Button width="full" colorScheme="teal" type="submit">
+          <Button
+            width="full"
+            colorScheme="teal"
+            type="submit"
+            onClick={submitGig}
+            disabled={loadingGig}
+          >
+            {loadingGig && (
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="teal.500"
+                size="md"
+              />
+            )}
             Submit
           </Button>
         </GridItem>

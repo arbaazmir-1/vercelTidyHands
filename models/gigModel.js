@@ -33,7 +33,7 @@ const gigSchema = new Schema({
   },
   timePosted: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   coords: {
     type: [Number],
@@ -44,6 +44,14 @@ const gigSchema = new Schema({
     type: Number,
     default: 0,
   },
+});
+
+//on delete gig, delete gig from user's gigsPosted array
+
+gigSchema.post("findOneAndDelete", async function (doc) {
+  if (doc) {
+    await User.findByIdAndUpdate(doc.buyer, { $pull: { gigsPosted: doc._id } });
+  }
 });
 
 const Gig = mongoose.model("Gig", gigSchema);

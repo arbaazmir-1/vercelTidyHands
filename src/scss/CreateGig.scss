@@ -1,0 +1,43 @@
+.fading{
+   
+    ::placeholder{
+        animation: fadein 1s;
+        -moz-animation: fadein 1s; /* Firefox */
+        -webkit-animation: fadein 1s; /* Safari and Chrome */
+        -o-animation: fadein 1s; /* Opera */
+    }
+    ::-ms-input-placeholder{
+        animation: fadein 1s;
+        -moz-animation: fadein 1s; /* Firefox */
+        -webkit-animation: fadein 1s; /* Safari and Chrome */
+        -o-animation: fadein 1s; /* Opera */
+    }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.notFading{
+
+    ::placeholder{
+        animation: fadeout 1s;
+        -moz-animation: fadeout 1s; /* Firefox */
+        -webkit-animation: fadeout 1s; /* Safari and Chrome */
+        -o-animation: fadeout 1s; /* Opera */
+    }
+    ::-ms-input-placeholder{
+        animation: fadeout 1s;
+        -moz-animation: fadeout 1s; /* Firefox */
+        -webkit-animation: fadeout 1s; /* Safari and Chrome */
+        -o-animation: fadeout 1s; /* Opera */
+    }
+  
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+
+    
+}
