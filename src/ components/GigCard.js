@@ -9,6 +9,7 @@ const GigCard = (props) => {
   let lat1 = gig.coords[1];
   let long1 = gig.coords[0];
   const [distance, setDistance] = useState("");
+  const [time, setTime] = useState("");
   let path = window.location.pathname;
 
   const { timePosted } = gig;
@@ -43,6 +44,12 @@ const GigCard = (props) => {
       return `${Math.round(timeDiffInYears)} Years Ago`;
     }
   };
+
+  useEffect(() => {
+    const interval = setTime(() => timeDecider(), 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   //measure distance between user and gig
   useEffect(() => {
@@ -105,7 +112,7 @@ const GigCard = (props) => {
             {distance} | {gig.noOfApplicants} Applicants{" "}
           </p>
           <h4>${gig.price}/Hour</h4>
-          <p>{timeDecider()}</p>
+          <p>{time}</p>
         </div>
         <Link to={{ pathname: "/gig/" + gig._id }}>
           <button>View</button>

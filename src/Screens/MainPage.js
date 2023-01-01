@@ -102,6 +102,24 @@ const MainPage = () => {
     } else if (!userInfo) {
       navigate("/");
     }
+    // future implementation
+    // const interval = setInterval(() => {
+    //   toast.info("Refreshing data", {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    //   if (userInfo) {
+    //     const token = userInfo.token;
+    //     locationBasedApiCall(token);
+    //   }
+    // }, 1000 * 60 * 5);
+
+    // return () => clearInterval(interval);
   }, [userInfo, data.length, error]);
 
   return (
