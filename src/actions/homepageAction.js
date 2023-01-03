@@ -5,6 +5,9 @@ import {
   REPORT_BUG_REQUEST,
   REPORT_BUG_SUCCESS,
   REPORT_BUG_FAIL,
+  LOAD_MORE_GIGS_REQUEST,
+  LOAD_MORE_GIGS_SUCCESS,
+  LOAD_MORE_GIGS_FAIL,
 } from "../constant/homepageConstant";
 import axios from "axios";
 
@@ -70,4 +73,43 @@ export const reportBugAction =
         payload: data,
       });
     } catch (error) {}
+  };
+
+export const loadMoreGigsAction =
+  ({ long, lat, token, lastGigId }) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: LOAD_MORE_GIGS_REQUEST });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get(
+        "/api/gigs/fetch?work=fetchMore&long=" +
+          long +
+          "&lat=" +
+          lat +
+          "&lastGigId=" +
+          lastGigId +
+          "",
+        config
+      );
+
+      dispatch({
+        type: LOAD_MORE_GIGS_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: LOAD_MORE_GIGS_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
   };

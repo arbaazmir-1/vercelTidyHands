@@ -4,13 +4,21 @@ import CatagoriesMenu from "../ components/CatagoriesMenu";
 import { useEffect } from "react";
 import GigCard from "../ components/GigCard";
 import { useSelector, useDispatch } from "react-redux";
-import { homepageAction } from "../actions/homepageAction";
+import { homepageAction, loadMoreGigsAction } from "../actions/homepageAction";
 import CurrentFeature from "../ components/currentFeature";
 import HelperProfile from "../ components/HelperProfile";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { logout } from "../actions/userAction";
-import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -19,10 +27,10 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const homepage = useSelector((state) => state.homePage);
-  const { loading, data } = homepage;
+  const { loading, data, loadingMore, errorMore } = homepage;
   const array = [1, 2];
   const array2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
+  let long, lat;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -56,8 +64,9 @@ const MainPage = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const long = position.coords.longitude;
-          const lat = position.coords.latitude;
+          long = position.coords.longitude;
+          lat = position.coords.latitude;
+
           //check if lang and lat are correct
           // const long = 101.60983276367188;
           // const lat = 4.823666572570801;
@@ -122,6 +131,73 @@ const MainPage = () => {
     // return () => clearInterval(interval);
   }, [userInfo, data.length, error]);
 
+  const loadMore = async () => {
+    if (errorMore) {
+      if (errorMore === "No gigs found") {
+        toast.error("No more gigs found", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error("Something went wrong, please try again", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } else {
+      let lastGigId = gigs[gigs.length - 1]._id;
+      const token = userInfo.token;
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            long = position.coords.longitude;
+            lat = position.coords.latitude;
+
+            //check if lang and lat are correct
+            // const long = 101.60983276367188;
+            // const lat = 4.823666572570801;
+            if (lat > 90 || lat < -90 || long > 180 || long < -180) {
+              return;
+            }
+
+            dispatch(loadMoreGigsAction({ long, lat, token, lastGigId }));
+          },
+
+          (error) => {
+            //if user denies location access
+            if (error.code === error.PERMISSION_DENIED) {
+              //show toast message
+              toast.error("Please allow location access to continue", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              // set delay to 3 seconds
+              setTimeout(() => {
+                navigate("/");
+              }, 3000);
+            }
+          },
+          { enableHighAccuracy: true }
+        );
+      }
+    }
+  };
+
   return (
     <>
       <NavbarMobile />
@@ -175,6 +251,28 @@ const MainPage = () => {
                     {gigs.map((gig) => (
                       <GigCard key={gig._id} gig={gig} />
                     ))}
+                    {errorMore && (
+                      <>
+                        <Text>No More Gigs at your location</Text>
+                      </>
+                    )}
+                    <Button
+                      className="loadMore"
+                      onClick={loadMore}
+                      disabled={loadingMore}
+                    >
+                      {loadingMore ? (
+                        <Spinner
+                          thickness="4px"
+                          speed="0.65s"
+                          emptyColor="gray.200"
+                          color="teal.500"
+                          size="md"
+                        />
+                      ) : (
+                        "Load More"
+                      )}
+                    </Button>
                   </div>
                 ) : (
                   <div className="noGigs">

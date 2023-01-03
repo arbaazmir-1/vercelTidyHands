@@ -6,16 +6,45 @@ import {
   REPORT_BUG_REQUEST,
   REPORT_BUG_SUCCESS,
   REPORT_BUG_FAIL,
+  LOAD_MORE_GIGS_REQUEST,
+  LOAD_MORE_GIGS_SUCCESS,
+  LOAD_MORE_GIGS_FAIL,
 } from "../constant/homepageConstant";
 
 export const homePageReducer = (state = { data: [] }, action) => {
   switch (action.type) {
     case HOME_PAGE_REQUEST:
-      return { loading: true, data: [] };
+      return { loading: true, loadingMore: false, data: [] };
     case HOME_PAGE_SUCCESS:
-      return { loading: false, data: action.payload };
+      return { loading: false, loadingMore: false, data: action.payload };
     case HOME_PAGE_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, loadingMore: false, error: action.payload };
+    case LOAD_MORE_GIGS_REQUEST:
+      return {
+        loadingMore: true,
+        data: {
+          ...state.data,
+        },
+      };
+    case LOAD_MORE_GIGS_SUCCESS:
+      return {
+        loadingMore: false,
+        // gigs are in data of existing state
+
+        data: {
+          ...state.data,
+          gigs: [...state.data.gigs, ...action.payload],
+        },
+      };
+    case LOAD_MORE_GIGS_FAIL:
+      return {
+        loadingMore: false,
+        data: {
+          ...state.data,
+        },
+        errorMore: action.payload,
+      };
+
     case HOME_PAGE_PAYLOAD_DELETE:
       return { data: [] };
 

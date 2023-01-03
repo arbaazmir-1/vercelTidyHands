@@ -27,7 +27,7 @@ const fetchHomeGigs = async (req, res) => {
       },
     })
       .sort({ _id: -1 })
-      .limit(15)
+      .limit(1)
       .populate("buyer", "name phone avatar");
     if (!gigs) {
       return res.status(404).json({ message: "No gigs found" });
@@ -60,6 +60,43 @@ const fetchHomeGigs = async (req, res) => {
 
     res.json(data);
   } catch (err) {
+    let error = err;
+    //check if jwt token is expired
+    if (err.name === "TokenExpiredError") {
+      error = "Token expired, please login again";
+    }
+    res.status(500).json({ error });
+  }
+};
+
+const fetchMoreGigs = async (req, res) => {
+  await protect(req, res);
+  let { long, lat } = req.query;
+  try {
+    await connectDB();
+    let distance = 20;
+    let { lastGigId } = req.query;
+    const gigs = await Gig.find({
+      coords: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: [long, lat],
+          },
+          $maxDistance: distance * 1000,
+        },
+      },
+      _id: { $lt: lastGigId },
+    })
+      .sort({ _id: -1 })
+      .limit(1)
+      .populate("buyer", "name phone avatar");
+
+    if (gigs.length === 0) {
+      return res.status(404).json({ message: "No gigs found" });
+    }
+    res.json(gigs);
+  } catch (e) {
     let error = err;
     //check if jwt token is expired
     if (err.name === "TokenExpiredError") {
@@ -134,4 +171,5 @@ module.exports = {
   fetchHomeGigs,
   searchGigs,
   report,
+  fetchMoreGigs,
 };

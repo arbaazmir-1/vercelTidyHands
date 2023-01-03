@@ -65,7 +65,6 @@ const CreateGig = () => {
             `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${process.env.REACT_APP_MAP_BOX_TOKEN}`
           )
           .then((res) => {
-            console.log(res.data.features[0].place_name);
             setAddress(res.data.features[0].place_name);
             setLoading(false);
           })

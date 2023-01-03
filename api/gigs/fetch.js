@@ -2,6 +2,7 @@ const {
   fetchHomeGigs,
   searchGigs,
   report,
+  fetchMoreGigs,
 } = require("../../utils/fetchMethods");
 
 export default async (req, res) => {
@@ -15,5 +16,7 @@ export default async (req, res) => {
     await searchGigs(req, res);
   } else if (requestType === "POST" && work === "reportbug") {
     await report(req, res);
+  } else if (requestType === "GET" && work === "fetchMore") {
+    await fetchMoreGigs(req, res);
   }
 };

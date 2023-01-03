@@ -2,7 +2,7 @@ import React from "react";
 
 import "../scss/gigCard.scss";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const GigCard = (props) => {
   const { gig } = props;
@@ -52,7 +52,7 @@ const GigCard = (props) => {
   }, []);
 
   //measure distance between user and gig
-  useEffect(() => {
+  const measureDistance = useMemo(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const long2 = position.coords.longitude;
@@ -81,7 +81,7 @@ const GigCard = (props) => {
         }
       });
     }
-  }, [lat1, long1]);
+  });
 
   return (
     <>
