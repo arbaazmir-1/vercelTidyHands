@@ -99,7 +99,8 @@ const GigPage = () => {
             <div className="gigCardInfoPage">
               <h2>{data.title}</h2>
               <p>
-                {data.category} | | {needWithTime(data.needWithin)}
+                {data.category.charAt(0).toUpperCase() + data.category.slice(1)}{" "}
+                | {needWithTime(data.needWithin)}
               </p>
               <p>
                 Posted By <span>{data.buyer.name}</span>
