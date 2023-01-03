@@ -27,7 +27,7 @@ const fetchHomeGigs = async (req, res) => {
       },
     })
       .sort({ _id: -1 })
-      .limit(1)
+      .limit(10)
       .populate("buyer", "name phone avatar");
     if (!gigs) {
       return res.status(404).json({ message: "No gigs found" });
@@ -89,7 +89,7 @@ const fetchMoreGigs = async (req, res) => {
       _id: { $lt: lastGigId },
     })
       .sort({ _id: -1 })
-      .limit(1)
+      .limit(10)
       .populate("buyer", "name phone avatar");
 
     if (gigs.length === 0) {

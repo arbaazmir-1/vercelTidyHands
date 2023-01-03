@@ -8,6 +8,7 @@ import {
   userDetailsReducer,
 } from "./reducers/userReducers";
 import { searchReducer } from "./reducers/searchReducer";
+import { gigViewReducer } from "./reducers/gigReducer";
 
 const reducer = combineReducers({
   homePage: homePageReducer,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   search: searchReducer,
   report: reportBugReducer,
+  gig: gigViewReducer,
 
   // add reducers here
 });

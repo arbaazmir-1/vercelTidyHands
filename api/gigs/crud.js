@@ -1,7 +1,7 @@
 const connectDB = require("../../utils/db");
 const { protect } = require("../../utils/authMiddleware");
 
-const { createNewGig } = require("../../utils/crudMethods");
+const { createNewGig, fetchSingleGig } = require("../../utils/crudMethods");
 
 export default async (req, res) => {
   await protect(req, res);
@@ -9,6 +9,7 @@ export default async (req, res) => {
     createNewGig(req, res);
   }
   if (req.method === "GET") {
+    fetchSingleGig(req, res);
   }
   if (req.method === "PUT") {
   }
