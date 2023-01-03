@@ -71,21 +71,21 @@ const GigPage = () => {
         <div className="GigPage">
           <div className="gigCardPage">
             <div className="gigIconContainerPage">
-              {data.category === "Cleaning" ? (
+              {data.category === "cleaning" ? (
                 <i className="fas fa-broom"></i>
-              ) : data.category === "Delivery" ? (
+              ) : data.category === "delivery" ? (
                 <i className="fas fa-truck"></i>
-              ) : data.category === "Moving" ? (
+              ) : data.category === "moving" ? (
                 <i className="fas fa-truck-moving"></i>
-              ) : data.category === "Tutoring" ? (
+              ) : data.category === "tutoring" ? (
                 <i className="fas fa-chalkboard-teacher"></i>
-              ) : data.category === "Gardening" ? (
+              ) : data.category === "gardening" ? (
                 <i className="fas fa-seedling"></i>
-              ) : data.category === "Handyman" ? (
+              ) : data.category === "handyman" ? (
                 <i className="fas fa-tools"></i>
-              ) : data.category === "Pet Care" ? (
+              ) : data.category === "pet" ? (
                 <i className="fas fa-paw"></i>
-              ) : data.category === "Tech Support" ? (
+              ) : data.category === "tech Support" ? (
                 <i className="fas fa-laptop"></i>
               ) : data.category === "Other" ? (
                 <i className="fas fa-question"></i>
