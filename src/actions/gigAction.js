@@ -18,6 +18,6 @@ export const gigViewAction = (id, token) => async (dispatch) => {
     const { gig } = data;
     dispatch({ type: GIG_VIEW_SUCCESS, payload: gig });
   } catch (e) {
-    dispatch({ type: GIG_VIEW_FAIL, payload: e.message });
+    dispatch({ type: GIG_VIEW_FAIL, payload: e.response.data.message });
   }
 };

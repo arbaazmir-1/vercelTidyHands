@@ -65,7 +65,10 @@ const GigPage = () => {
         </div>
       ) : error ? (
         <div className="error">
-          <p>{error}</p>
+          <p>
+            {" "}
+            <i className="fa fa-exclamation"></i> {error}
+          </p>
         </div>
       ) : data.title ? (
         <div className="GigPage">

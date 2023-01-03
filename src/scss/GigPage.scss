@@ -156,3 +156,26 @@
 
 
 }
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 88vh;
+    width: 100vw;
+    
+    background-color: #f8d7da;
+    
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+    p{color: #721c24;
+        font-size: 30px;
+        font-weight: 300;
+        i{
+            font-size: 35px;
+            margin-right: 10px;
+            
+        }
+    }
+
+}
