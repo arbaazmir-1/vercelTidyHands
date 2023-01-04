@@ -70,7 +70,6 @@ const fetchHomeGigs = async (req, res) => {
 };
 
 const fetchMoreGigs = async (req, res) => {
-  await protect(req, res);
   let { long, lat } = req.query;
   try {
     await connectDB();
@@ -107,8 +106,6 @@ const fetchMoreGigs = async (req, res) => {
 };
 
 const searchGigs = async (req, res) => {
-  console.log("searching gigs");
-  await protect(req, res);
   let { search } = req.query;
   let { long, lat } = req.query;
   let distance = 20;
@@ -147,7 +144,6 @@ const searchGigs = async (req, res) => {
 };
 
 const report = async (req, res) => {
-  await protect(req, res);
   const { title, description } = req.body;
   try {
     await connectDB();

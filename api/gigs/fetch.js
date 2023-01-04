@@ -4,8 +4,10 @@ const {
   report,
   fetchMoreGigs,
 } = require("../../utils/fetchMethods");
+const { protect } = require("../../utils/authMiddleware");
 
 export default async (req, res) => {
+  await protect(req, res);
   let requestType = req.method;
   let { search } = req.query;
 
