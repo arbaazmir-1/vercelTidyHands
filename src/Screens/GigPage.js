@@ -20,7 +20,6 @@ const GigPage = () => {
     dispatch(gigViewAction(id, token));
   }, [dispatch, id]);
 
-  let MAB_BOX_TOKEN = process.env.REACT_APP_MAP_BOX_TOKEN;
   const needWithTime = (time) => {
     //formate time in social media style
     let timeNow = new Date();
@@ -117,7 +116,7 @@ const GigPage = () => {
           <div className="mapContainer">
             <img
               src={
-                `https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+555555(${data.coords[0]},${data.coords[1]})/${data.coords[0]},${data.coords[1]},18.08,0/1280x1280?access_token=` +
+                `https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+555555(${data.coords[0]},${data.coords[1]})/auto/1280x1280@2x?access_token=` +
                 process.env.REACT_APP_MAP_BOX_TOKEN
               }
               alt="location map"
@@ -129,7 +128,7 @@ const GigPage = () => {
               className="mapBtn"
               onClick={() => {
                 window.open(
-                  "https://www.google.com/maps/dir/?api=1&destination=38.892035,-77.043686"
+                  `https://www.google.com/maps/dir/?api=1&destination=${data.coords[1]},${data.coords[0]}`
                 );
               }}
             >

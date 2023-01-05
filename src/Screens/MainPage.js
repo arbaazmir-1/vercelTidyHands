@@ -102,11 +102,27 @@ const MainPage = () => {
   };
   useEffect(() => {
     if (userInfo && data.length === 0) {
-      const token = userInfo.token;
-
-      locationBasedApiCall(token);
+      if (data) {
+        if (data.length === 0) {
+          const token = userInfo.token;
+          locationBasedApiCall(token);
+        }
+      }
     } else if (error === "jwt expired") {
-      dispatch(logout());
+      //set delay to 3 seconds
+      setTimeout(() => {
+        toast.error("Session expired, please login again", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(logout());
+      }, 3000);
+
       navigate("/");
     } else if (!userInfo) {
       navigate("/");
@@ -129,7 +145,7 @@ const MainPage = () => {
     // }, 1000 * 60 * 5);
 
     // return () => clearInterval(interval);
-  }, [userInfo, data.length, error]);
+  }, [userInfo, error]);
 
   const loadMore = async () => {
     if (errorMore) {
